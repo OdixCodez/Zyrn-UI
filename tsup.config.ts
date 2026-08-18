@@ -2,13 +2,11 @@ import { defineConfig } from 'tsup';
 
 export default defineConfig({
   entry: ['src/index.ts'],
-  format: ['cjs', 'esm'],
-  dts: false,
-  splitting: false,
+  format: ['esm', 'cjs'],
+  dts: true,
   sourcemap: true,
   clean: true,
-  minify: true,
-  external: ['react'],
+  external: ['react', 'react-dom'],
   injectStyle: false,
   outExtension({ format }) {
     return { js: format === 'esm' ? '.mjs' : '.js' };

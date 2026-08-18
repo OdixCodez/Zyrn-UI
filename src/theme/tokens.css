@@ -1,0 +1,31 @@
+:root {
+  /* Ink Palette */
+  --zyrn-ink-bg: #090909;
+  --zyrn-ink-surface: #111111;
+  --zyrn-ink-surface-elevated: #171717;
+  --zyrn-ink-surface-hover: #1D1D1D;
+  --zyrn-ink-surface-active: #242424;
+
+  /* Text */
+  --zyrn-ink-text: #F2F0EA;
+  --zyrn-ink-text-secondary: #D8D5CC;
+  --zyrn-ink-text-muted: #8B8983;
+  --zyrn-ink-text-disabled: #66645F;
+
+  /* Crimson */
+  --zyrn-accent: #B51F2E;
+  --zyrn-accent-hover: #C52A39;
+  --zyrn-accent-active: #8F1825;
+
+  /* Bone */
+  --zyrn-bone: #C8C1AE;
+
+  /* Optional indigo */
+  --zyrn-indigo: #34365C;
+
+  /* Borders */
+  --zyrn-border-ink: rgba(242, 240, 234, 0.10);
+  --zyrn-border-ink-hover: rgba(242, 240, 234, 0.16);
+  --zyrn-border-ink-strong: rgba(242, 240, 234, 0.18);
+  --zyrn-border-focus: rgba(181, 31, 46, 0.75);
+}

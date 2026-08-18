@@ -1,23 +1,12 @@
-/// <reference path="./declarations.d.ts" />
+import './theme/index.css';
 
-// ─────────────────────────────────────────────────────────────
-// zyrn-ui — public API  v1.1.0
-// CSS import first so tsup emits a standalone dist/index.css.
-// ─────────────────────────────────────────────────────────────
-import './styles.css';
+export { ZyrnButton } from './components/Button';
+export type { ZyrnButtonProps } from './components/Button';
 
-// ── Components ───────────────────────────────────────────────
-export { ZyrnButton, default as Button } from './Button';
-export { ZyrnCard,   default as Card   } from './Card';
+export { ZyrnCard } from './components/Card';
+export type { ZyrnCardProps, ZyrnCardVariant } from './components/Card';
 
-// ── TypeScript types ─────────────────────────────────────────
-export type {
-  ZyrnButtonProps,
-  ZyrnButtonVariant,
-  ZyrnButtonSize,
-} from './Button';
+export { ZyrnInput } from './components/Input';
+export type { ZyrnInputProps } from './components/Input';
 
-export type {
-  ZyrnCardProps,
-  ZyrnCardVariant,
-} from './Card';
+export { Animations, Easing, Frames, MotionClasses, zyrnAnimate } from './motion';

@@ -1,0 +1,18 @@
+:root {
+  --zyrn-font-ui: 'Geist', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --zyrn-font-jp: 'Noto Sans JP', sans-serif;
+  --zyrn-font-display: 'Grenze Gotisch', serif;
+  --zyrn-font-mono: 'Geist Mono', 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  --zyrn-font-mincho: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
+
+  --zyrn-text-display: 3.5rem;
+  --zyrn-text-h1: 2.5rem;
+  --zyrn-text-h2: 2rem;
+  --zyrn-text-h3: 1.5rem;
+  --zyrn-text-h4: 1.25rem;
+  --zyrn-text-body: 1rem;
+  --zyrn-text-body-sm: 0.875rem;
+  --zyrn-text-label: 0.875rem;
+  --zyrn-text-caption: 0.75rem;
+  --zyrn-text-code: 0.875rem;
+}
