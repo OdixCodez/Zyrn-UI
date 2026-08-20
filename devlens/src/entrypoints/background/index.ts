@@ -71,6 +71,18 @@ async function runMatchingScripts(tabId: number, url?: string): Promise<void> {
   }
 }
 
+function openWorkspaceFromUserGesture(tabId: number | undefined, panel: DevLensPanel): void {
+  const chromeApi = (globalThis as typeof globalThis & { chrome?: { sidePanel?: { open: (options: { tabId: number }) => Promise<void> } } }).chrome;
+  if (chromeApi?.sidePanel && tabId !== undefined) {
+    // Edge requires sidePanel.open() to be invoked directly in the click handler,
+    // before any awaited extension API work can consume the user gesture.
+    void chromeApi.sidePanel.open({ tabId }).catch((error: unknown) => console.warn('DevLens could not open the side panel.', error));
+    void browser.storage.local.set({ [ACTIVE_PANEL_KEY]: panel });
+    return;
+  }
+  void openWorkspace(panel);
+}
+
 export default defineBackground(() => {
   browser.runtime.onInstalled.addListener(async () => {
     const settings = await browser.storage.local.get('settings');
@@ -88,7 +100,7 @@ export default defineBackground(() => {
     }
   });
 
-  browser.action.onClicked.addListener(() => { void openWorkspace('dashboard'); });
+  browser.action.onClicked.addListener((tab) => { openWorkspaceFromUserGesture(tab.id, 'dashboard'); });
 
   browser.commands.onCommand.addListener((command) => {
     const panels: Record<string, DevLensPanel> = {
