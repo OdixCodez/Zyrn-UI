@@ -21,6 +21,9 @@ export type { ZyrnSelectProps } from './components/Select';
 export { ZyrnBadge } from './components/Badge';
 export type { ZyrnBadgeProps, ZyrnBadgeSize, ZyrnBadgeVariant } from './components/Badge';
 
+export { ZyrnAlert } from './components/Alert';
+export type { ZyrnAlertProps, ZyrnAlertRole, ZyrnAlertVariant } from './components/Alert';
+
 export { ZyrnCheckbox } from './components/Checkbox';
 export type { ZyrnCheckboxProps } from './components/Checkbox';
 

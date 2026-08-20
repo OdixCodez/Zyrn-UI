@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
+  ZyrnAlert,
   ZyrnAlertDialog,
   ZyrnBadge,
   ZyrnButton,
@@ -50,6 +51,7 @@ function GalleryContent() {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [alertDialogOpen, setAlertDialogOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(true);
   const [armed, setArmed] = useState(true);
   const [telemetry, setTelemetry] = useState(false);
   const [channel, setChannel] = useState('stable');
@@ -240,6 +242,18 @@ function GalleryContent() {
                   Trigger toast
                 </ZyrnButton>
               </div>
+              {alertVisible ? (
+                <ZyrnAlert
+                  variant="warning"
+                  title="Review required"
+                  onDismiss={() => setAlertVisible(false)}
+                  dismissLabel="Dismiss release review alert"
+                >
+                  Verify the release notes before the deployment window opens.
+                </ZyrnAlert>
+              ) : (
+                <ZyrnButton variant="outline" onClick={() => setAlertVisible(true)} kanji="再">Restore inline alert</ZyrnButton>
+              )}
               <ZyrnPopover
                 open={popoverOpen}
                 onOpenChange={setPopoverOpen}

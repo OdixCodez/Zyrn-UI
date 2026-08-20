@@ -1,0 +1,121 @@
+.zyrn-alert {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--zyrn-color-border-strong);
+  border-left: 4px solid var(--zyrn-color-text-muted);
+  border-radius: var(--zyrn-radius);
+  background: var(--zyrn-color-surface);
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--zyrn-color-text) 22%, transparent);
+  color: var(--zyrn-color-text);
+}
+
+.zyrn-alert--success {
+  border-left-color: #4d9b72;
+}
+
+.zyrn-alert--warning {
+  border-left-color: #c28736;
+}
+
+.zyrn-alert--danger {
+  border-left-color: var(--zyrn-color-brand);
+}
+
+.zyrn-alert--info {
+  border-left-color: var(--zyrn-indigo);
+}
+
+.zyrn-alert__marker {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  color: var(--zyrn-color-text-muted);
+  font-family: var(--zyrn-font-mono);
+  font-size: 0.95rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.zyrn-alert--success .zyrn-alert__marker {
+  color: #4d9b72;
+}
+
+.zyrn-alert--warning .zyrn-alert__marker {
+  color: #c28736;
+}
+
+.zyrn-alert--danger .zyrn-alert__marker {
+  color: var(--zyrn-color-brand);
+}
+
+.zyrn-alert--info .zyrn-alert__marker {
+  color: var(--zyrn-indigo);
+}
+
+.zyrn-alert__title,
+.zyrn-alert__description {
+  margin: 0;
+}
+
+.zyrn-alert__title {
+  font-family: var(--zyrn-font-ui);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.zyrn-alert__description {
+  margin-top: 5px;
+  color: var(--zyrn-color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.zyrn-alert__dismiss {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--zyrn-radius);
+  background: transparent;
+  color: var(--zyrn-color-text-muted);
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.zyrn-alert__dismiss:hover,
+.zyrn-alert__dismiss:focus-visible {
+  border-color: var(--zyrn-color-brand);
+  color: var(--zyrn-color-text);
+  outline: none;
+}
+
+@media (max-width: 420px) {
+  .zyrn-alert {
+    grid-template-columns: 30px minmax(0, 1fr);
+  }
+
+  .zyrn-alert__dismiss {
+    grid-column: 2;
+    justify-self: end;
+    margin-top: -34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zyrn-alert,
+  .zyrn-alert__dismiss {
+    transition: none;
+  }
+}

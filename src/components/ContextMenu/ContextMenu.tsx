@@ -112,6 +112,7 @@ export function ZyrnContextMenu({ trigger, items, label = 'Context menu', classN
                 if (item.disabled) return;
                 item.onSelect?.();
                 close();
+                window.requestAnimationFrame(() => triggerRef.current?.focus());
               }}
             >
               <span className="zyrn-context-menu__item-content">

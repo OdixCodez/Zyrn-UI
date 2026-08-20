@@ -139,6 +139,31 @@ It accepts `label`, `kanji`, `description`, `error`, `size`, `fullWidth`, `place
 | `kanji` | `React.ReactNode` | — | Decorative Japanese accent. |
 | `dot` | `boolean` | `false` | Adds a decorative status dot. |
 
+### `ZyrnAlert`
+
+`ZyrnAlert` is a persistent, in-context feedback primitive for success, informational, warning, and error states. It defaults to a polite `role="status"` announcement; the `danger` variant defaults to assertive `role="alert"` semantics. Use `role="none"` only when the alert is static content that must not be announced on insertion.
+
+```tsx
+<ZyrnAlert
+  variant="warning"
+  title="Review required"
+  onDismiss={() => setReviewVisible(false)}
+  dismissLabel="Dismiss release review alert"
+>
+  Verify the release notes before the deployment window opens.
+</ZyrnAlert>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---:|---|
+| `title` | `React.ReactNode` | — | Required primary message and accessible alert summary. |
+| `children` | `React.ReactNode` | — | Optional supporting description beneath the title. |
+| `variant` | `'default' \| 'success' \| 'warning' \| 'danger' \| 'info'` | `'default'` | Visual treatment; `danger` uses assertive alert semantics by default. |
+| `role` | `'alert' \| 'status' \| 'none'` | Variant-derived | Overrides live-region behavior. `none` removes the landmark role. |
+| `onDismiss` | `() => void` | — | Renders a dismiss button and receives the dismissal action. |
+| `dismissLabel` | `string` | `'Dismiss alert'` | Accessible name for the optional dismiss button. |
+| `...rest` | `HTMLAttributes<HTMLDivElement>` | — | Native root attributes such as `data-*`, `id`, and `aria-*`. |
+
 ### Selection controls
 
 `ZyrnCheckbox`, `ZyrnSwitch`, `ZyrnRadioGroup`, and `ZyrnSegmentedControl` share the same description and error contract as the existing input controls. They can be controlled or uncontrolled where the underlying interaction model allows it and all support the supplied ink and paper themes.
@@ -573,6 +598,7 @@ Import styles through the exported `zyrn-ui/styles.css` package subpath.
 ```text
 src/
 ├── components/
+│   ├── Alert/
 │   ├── AlertDialog/
 │   ├── Badge/
 │   ├── Button/
