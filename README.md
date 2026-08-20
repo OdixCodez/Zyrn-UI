@@ -230,6 +230,58 @@ It accepts `label`, `kanji`, `description`, `error`, `size`, `fullWidth`, `place
 | `lines` | `number` | `3` | Number of lines rendered for the `text` variant. |
 | `animate` | `boolean` | `true` | Enables shimmer unless reduced-motion preferences disable it. |
 
+## Accessibility and feedback patterns
+
+### Choose the right feedback primitive
+
+| Need | Use | Accessibility behavior |
+|---|---|---|
+| Persistent, in-flow confirmation, warning, or error | `ZyrnAlert` | Uses a polite `status` region by default and an assertive `alert` region for `danger`; callers can opt out with `role="none"`. |
+| Short-lived global notification | `ZyrnToastProvider` and `useZyrnToast` | Adds a notification to the provider’s live region and offers a labelled dismissal control. |
+| Empty collection or first-use screen | `ZyrnEmptyState` | Renders a labelled semantic section, visible heading, explanatory content, and optional native actions. |
+| Known completion amount | `ZyrnProgress` with `value` | Emits a labelled determinate `progressbar` with normalized range and value attributes. |
+| Active work with unknown completion | `ZyrnProgress` without `value` or with `indeterminate` | Emits a labelled indeterminate `progressbar` without misleading numeric ARIA values. |
+| Layout placeholder while data is loading | `ZyrnSkeleton` | Is decorative and always hidden from assistive technology; the surrounding region owns loading communication. |
+
+### Loading-state pattern
+
+Put a skeleton inside a named, busy region so assistive technologies receive meaningful state while visual users receive layout continuity. Do not use the Skeleton component itself as the announcement surface.
+
+```tsx
+<section aria-busy="true" aria-label="Loading deployment data">
+  <ZyrnSkeleton variant="text" lines={3} />
+  <ZyrnSkeleton variant="rect" height="9rem" />
+</section>
+
+// When the amount of work is known:
+<ZyrnProgress label="Release upload" value={68} />
+
+// When the amount is unknown:
+<ZyrnProgress label="Indexing records" indeterminate />
+```
+
+`ZyrnProgress` treats non-finite values (`NaN`, positive infinity, and negative infinity) as indeterminate activity. Non-finite bounds fall back to a valid range and `max <= min` is normalized before any ARIA range or visual fill is calculated.
+
+### ContextMenu keyboard reference
+
+| Input | Result |
+|---|---|
+| Right-click | Opens the menu at the pointer location. |
+| `ContextMenu` or `Shift+F10` | Opens from the focused trigger and places focus on the first enabled item. |
+| `ArrowDown` / `ArrowUp` | Moves through enabled items, wrapping across the enabled item list while skipping disabled items. |
+| `Home` / `End` | Moves focus to the first or last enabled item. |
+| `Escape` | Closes the menu and returns focus to the trigger. |
+| Select an item | Runs `onSelect`, closes the menu, and returns focus to the trigger. |
+| Pointer interaction outside | Dismisses the menu through the shared overlay layer. |
+
+### Compatibility
+
+`zyrn-ui` supports **Node.js 18 or newer** and React **18** or **19**. Import the stylesheet once from the explicit package export:
+
+```tsx
+import 'zyrn-ui/styles.css';
+```
+
 ### Selection controls
 
 `ZyrnCheckbox`, `ZyrnSwitch`, `ZyrnRadioGroup`, and `ZyrnSegmentedControl` share the same description and error contract as the existing input controls. They can be controlled or uncontrolled where the underlying interaction model allows it and all support the supplied ink and paper themes.

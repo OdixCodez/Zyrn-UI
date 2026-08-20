@@ -1,16 +1,16 @@
 {
   "name": "zyrn-ui",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "description": "Clean structure. Dirty edges. A premium React + TypeScript component library.",
   "license": "MIT",
   "author": "OdixCodez",
-  "homepage": "https://github.com/OdixCodez/Zyrn-UI#readme",
+  "homepage": "https://github.com/zyrndotio/Zyrn-UI#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OdixCodez/Zyrn-UI.git"
+    "url": "git+https://github.com/zyrndotio/Zyrn-UI.git"
   },
   "bugs": {
-    "url": "https://github.com/OdixCodez/Zyrn-UI/issues"
+    "url": "https://github.com/zyrndotio/Zyrn-UI/issues"
   },
   "keywords": [
     "react",

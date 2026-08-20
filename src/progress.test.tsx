@@ -32,6 +32,36 @@ describe('ZyrnProgress', () => {
     expect(screen.getByRole('progressbar', { name: 'Review' })).toHaveAttribute('aria-valuenow', '20');
   });
 
+  it('treats non-finite values as indeterminate so invalid ARIA values and CSS widths are never emitted', () => {
+    const { rerender } = render(<ZyrnProgress label="Release upload" value={Number.NaN} />);
+
+    for (const invalidValue of [Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY]) {
+      rerender(<ZyrnProgress label="Release upload" value={invalidValue} />);
+      const progressbar = screen.getByRole('progressbar', { name: 'Release upload' });
+      expect(progressbar).toHaveClass('zyrn-progress__track--indeterminate');
+      expect(progressbar).not.toHaveAttribute('aria-valuemin');
+      expect(progressbar).not.toHaveAttribute('aria-valuemax');
+      expect(progressbar).not.toHaveAttribute('aria-valuenow');
+      expect(progressbar).toHaveAttribute('aria-valuetext', 'In progress');
+      expect(progressbar.querySelector('.zyrn-progress__indicator')).not.toHaveAttribute('style');
+    }
+  });
+
+  it('normalizes invalid ranges and blank value text to safe determinate defaults', () => {
+    const { rerender } = render(<ZyrnProgress label="Review" value={50} min={Number.NaN} max={Number.POSITIVE_INFINITY} valueText="   " />);
+    let progressbar = screen.getByRole('progressbar', { name: 'Review' });
+    expect(progressbar).toHaveAttribute('aria-valuemin', '0');
+    expect(progressbar).toHaveAttribute('aria-valuemax', '100');
+    expect(progressbar).toHaveAttribute('aria-valuenow', '50');
+    expect(progressbar).toHaveAttribute('aria-valuetext', '50% complete');
+
+    rerender(<ZyrnProgress label="Review" value={9} min={8} max={8} />);
+    progressbar = screen.getByRole('progressbar', { name: 'Review' });
+    expect(progressbar).toHaveAttribute('aria-valuemin', '8');
+    expect(progressbar).toHaveAttribute('aria-valuemax', '9');
+    expect(progressbar).toHaveAttribute('aria-valuenow', '9');
+  });
+
   it('omits numeric ARIA values for indeterminate work while retaining an accessible activity description', () => {
     render(<ZyrnProgress label="Indexing records" description="This may take a moment." indeterminate />);
 
