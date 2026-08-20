@@ -269,6 +269,115 @@ const [open, setOpen] = useState(false);
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Maximum dialog width preset. |
 | `closeOnOverlayClick` | `boolean` | `true` | Enables closing after a backdrop click. |
 
+### `ZyrnPopover`
+
+`ZyrnPopover` is a controlled, trigger-anchored non-modal dialog for compact contextual content. It links the trigger and content with `aria-haspopup`, `aria-expanded`, and `aria-controls`; it closes through Escape or a pointer interaction outside the component.
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<ZyrnPopover
+  open={open}
+  onOpenChange={setOpen}
+  title="Runtime details"
+  side="bottom"
+  trigger={<ZyrnButton variant="outline">Inspect runtime</ZyrnButton>}
+>
+  Runtime nominal. All observable services are within expected thresholds.
+</ZyrnPopover>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---:|---|
+| `open` | `boolean` | — | Controls content visibility. |
+| `onOpenChange` | `(open: boolean) => void` | — | Receives trigger toggles and dismissal requests. |
+| `trigger` | `React.ReactElement` | — | A single interactive trigger element. |
+| `title` | `React.ReactNode` | — | Optional accessible dialog heading. |
+| `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Preferred placement adjacent to the trigger. |
+| `align` | `'start' \| 'center' \| 'end'` | `'start'` | Alignment along the selected side. |
+
+### `ZyrnAlertDialog`
+
+`ZyrnAlertDialog` is a controlled confirmation dialog for consequential actions. It uses `role="alertdialog"`, traps focus, locks background scrolling, restores focus on close, and deliberately ignores backdrop clicks. The caller supplies the confirm handler; cancellation is always explicit.
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<ZyrnAlertDialog
+  open={open}
+  onOpenChange={setOpen}
+  title="Purge archived records"
+  description="This action cannot be undone."
+  confirmLabel="Purge archive"
+  onConfirm={purgeArchive}
+>
+  Archived records will be permanently removed.
+</ZyrnAlertDialog>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---:|---|
+| `open` | `boolean` | — | Controls dialog visibility. |
+| `onOpenChange` | `(open: boolean) => void` | — | Receives requests from Escape, the close control, and Cancel. |
+| `title` | `React.ReactNode` | — | Required accessible alert-dialog title. |
+| `description` | `React.ReactNode` | — | Optional descriptive text associated with the dialog. |
+| `onConfirm` | `() => void` | — | Runs after the confirm action is selected. |
+| `confirmLabel` / `cancelLabel` | `string` | `'Confirm action'` / `'Cancel'` | Visible labels for the explicit actions. |
+| `confirmDisabled` | `boolean` | `false` | Disables the confirm action when an additional condition is required. |
+| `closeOnConfirm` | `boolean` | `true` | Determines whether confirming also closes the dialog. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'sm'` | Maximum dialog width preset. |
+
+### `ZyrnDrawer`
+
+`ZyrnDrawer` is a controlled modal side sheet for supporting workflows that need more room than a popover. It provides a labelled `role="dialog"`, focus trapping, focus restoration, body-scroll locking, a close control, Escape dismissal, and optional backdrop dismissal.
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<ZyrnDrawer
+  open={open}
+  onOpenChange={setOpen}
+  title="Deployment settings"
+  description="Configure the active release before launch."
+  side="right"
+>
+  <ZyrnButton onClick={() => setOpen(false)}>Save settings</ZyrnButton>
+</ZyrnDrawer>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---:|---|
+| `open` | `boolean` | — | Controls drawer visibility. |
+| `onOpenChange` | `(open: boolean) => void` | — | Receives close requests from Escape, the close control, and optionally the backdrop. |
+| `title` | `React.ReactNode` | — | Required accessible dialog title. |
+| `description` | `React.ReactNode` | — | Optional descriptive text associated with the dialog. |
+| `side` | `'left' \| 'right'` | `'right'` | Edge from which the drawer enters. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Width preset. |
+| `closeLabel` | `string` | `'Close drawer'` | Accessible name for the close button. |
+| `closeOnOverlayClick` | `boolean` | `true` | Enables closing after a backdrop click. |
+
+### `ZyrnContextMenu`
+
+`ZyrnContextMenu` provides a controlled right-click action menu. The trigger opens it on a pointer context-click, the `ContextMenu` key, or `Shift+F10`; the menu focuses its first enabled action and supports Arrow, Home, End, Escape, disabled items, shortcuts, outside-pointer dismissal, and automatic close after selection.
+
+```tsx
+<ZyrnContextMenu
+  trigger={<ZyrnButton variant="outline">Right-click operations</ZyrnButton>}
+  items={[
+    { label: 'Inspect signal', shortcut: 'I', onSelect: inspectSignal },
+    { label: 'Archive snapshot', shortcut: 'A', onSelect: archiveSnapshot },
+    { label: 'Locked operation', disabled: true },
+  ]}
+/>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---:|---|
+| `trigger` | `React.ReactElement` | — | A single interactive element that receives context-menu behavior. |
+| `items` | `ZyrnContextMenuItem[]` | — | Ordered action descriptors with `label`, optional `shortcut`, `disabled`, and `onSelect`. |
+| `ariaLabel` | `string` | `'Context menu'` | Accessible label for the menu. |
+| `className` | `string` | — | Optional root class name. |
+
 ### `ZyrnDropdown`
 
 `ZyrnDropdown` and `ZyrnDropdownItem` provide a composable button-driven menu. The menu supports arrow-key navigation, Home, End, Escape, outside clicks, disabled items, and automatic closing after a selection.
@@ -464,17 +573,22 @@ Import styles through the exported `zyrn-ui/styles.css` package subpath.
 ```text
 src/
 ├── components/
+│   ├── AlertDialog/
 │   ├── Badge/
 │   ├── Button/
 │   ├── Card/
 │   ├── Checkbox/
 │   ├── Container/
+│   ├── ContextMenu/
+│   ├── Drawer/
 │   ├── Dropdown/
 │   ├── Field/
 │   ├── Grid/
 │   ├── Inline/
 │   ├── Input/
 │   ├── Modal/
+│   ├── Overlay/
+│   ├── Popover/
 │   ├── RadioGroup/
 │   ├── SegmentedControl/
 │   ├── Select/

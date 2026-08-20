@@ -1,0 +1,27 @@
+.zyrn-alert-dialog .zyrn-modal__header {
+  border-bottom-color: var(--zyrn-color-brand);
+}
+
+.zyrn-alert-dialog__content {
+  display: grid;
+  gap: var(--zyrn-space-5);
+}
+
+.zyrn-alert-dialog__body {
+  color: var(--zyrn-color-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.zyrn-alert-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--zyrn-space-3);
+}
+
+@media (max-width: 480px) {
+  .zyrn-alert-dialog__actions .zyrn-btn {
+    flex: 1 1 100%;
+  }
+}

@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
+  ZyrnAlertDialog,
   ZyrnBadge,
   ZyrnButton,
   ZyrnCard,
   ZyrnCheckbox,
   ZyrnContainer,
+  ZyrnContextMenu,
+  ZyrnDrawer,
   ZyrnDropdown,
   ZyrnDropdownItem,
   ZyrnGrid,
   ZyrnInline,
   ZyrnInput,
   ZyrnModal,
+  ZyrnPopover,
   ZyrnRadioGroup,
   ZyrnSelect,
   ZyrnSegmentedControl,
@@ -43,6 +47,9 @@ function ThemeToggle() {
 function GalleryContent() {
   const [submitted, setSubmitted] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [armed, setArmed] = useState(true);
   const [telemetry, setTelemetry] = useState(false);
   const [channel, setChannel] = useState('stable');
@@ -223,6 +230,8 @@ function GalleryContent() {
             <div className="gallery__stack">
               <div className="gallery__row">
                 <ZyrnButton onClick={() => setModalOpen(true)} kanji="開">Open modal</ZyrnButton>
+                <ZyrnButton onClick={() => setAlertDialogOpen(true)} variant="outline" kanji="警">Confirm purge</ZyrnButton>
+                <ZyrnButton onClick={() => setDrawerOpen(true)} variant="secondary" kanji="側">Open drawer</ZyrnButton>
                 <ZyrnButton
                   variant="secondary"
                   onClick={() => toast({ title: 'System armed', description: 'A toast using the ink motion system.', variant: 'success' })}
@@ -231,6 +240,26 @@ function GalleryContent() {
                   Trigger toast
                 </ZyrnButton>
               </div>
+              <ZyrnPopover
+                open={popoverOpen}
+                onOpenChange={setPopoverOpen}
+                title="Runtime annotation"
+                side="bottom"
+                trigger={<ZyrnButton variant="outline" kanji="注">Inspect runtime</ZyrnButton>}
+              >
+                <div className="gallery__overlay-copy">
+                  <strong>Runtime nominal.</strong>
+                  <span>Popover content stays anchored to its trigger and can be dismissed with Escape or an outside pointer interaction.</span>
+                </div>
+              </ZyrnPopover>
+              <ZyrnContextMenu
+                trigger={<ZyrnButton variant="outline" kanji="文">Right-click operations</ZyrnButton>}
+                items={[
+                  { label: 'Inspect signal', shortcut: 'I', onSelect: () => toast({ title: 'Signal inspected', variant: 'info' }) },
+                  { label: 'Archive snapshot', shortcut: 'A', onSelect: () => toast({ title: 'Snapshot archived', variant: 'success' }) },
+                  { label: 'Locked operation', disabled: true },
+                ]}
+              />
               <ZyrnDropdown label="Operations">
                 <ZyrnDropdownItem description="Keep the current draft active" onSelect={() => toast({ title: 'Draft saved', variant: 'success' })}>
                   Save draft
@@ -246,6 +275,31 @@ function GalleryContent() {
           </ZyrnCard>
         </section>
       </main>
+
+      <ZyrnAlertDialog
+        open={alertDialogOpen}
+        onOpenChange={setAlertDialogOpen}
+        title="Purge archived records"
+        description="This action cannot be undone."
+        confirmLabel="Purge archive"
+        onConfirm={() => toast({ title: 'Archive purged', description: 'The archived records were removed.', variant: 'danger' })}
+      >
+        This irreversible demonstration requires an explicit confirmation and ignores backdrop clicks.
+      </ZyrnAlertDialog>
+
+      <ZyrnDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        title="Deployment settings"
+        description="Tune the active release before it enters the queue."
+        side="right"
+      >
+        <div className="gallery__overlay-copy">
+          <strong>Release window: 18:00 UTC</strong>
+          <span>The drawer is a modal side sheet with focus trapping, scroll locking, and Escape-to-close behavior.</span>
+          <ZyrnButton onClick={() => { setDrawerOpen(false); toast({ title: 'Settings saved', variant: 'success' }); }} kanji="保存">Save settings</ZyrnButton>
+        </div>
+      </ZyrnDrawer>
 
       <ZyrnModal
         open={modalOpen}

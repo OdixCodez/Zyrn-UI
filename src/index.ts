@@ -60,6 +60,18 @@ export type { ZyrnVisuallyHiddenProps } from './components/VisuallyHidden';
 export { ZyrnModal } from './components/Modal';
 export type { ZyrnModalProps, ZyrnModalSize } from './components/Modal';
 
+export { ZyrnPopover } from './components/Popover';
+export type { ZyrnPopoverAlign, ZyrnPopoverProps, ZyrnPopoverSide } from './components/Popover';
+
+export { ZyrnAlertDialog } from './components/AlertDialog';
+export type { ZyrnAlertDialogProps } from './components/AlertDialog';
+
+export { ZyrnDrawer } from './components/Drawer';
+export type { ZyrnDrawerProps, ZyrnDrawerSide, ZyrnDrawerSize } from './components/Drawer';
+
+export { ZyrnContextMenu } from './components/ContextMenu';
+export type { ZyrnContextMenuItem, ZyrnContextMenuProps } from './components/ContextMenu';
+
 export { ZyrnDropdown, ZyrnDropdownItem } from './components/Dropdown';
 export type { ZyrnDropdownAlign, ZyrnDropdownItemProps, ZyrnDropdownProps } from './components/Dropdown';
 

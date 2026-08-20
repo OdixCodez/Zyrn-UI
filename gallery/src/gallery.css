@@ -138,6 +138,26 @@
     gap: 10px;
   }
 
+  .gallery__overlay-copy {
+    display: grid;
+    gap: 10px;
+    color: var(--zyrn-color-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .gallery__overlay-copy strong {
+    color: var(--zyrn-color-text);
+    font-family: var(--zyrn-font-ui);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .gallery__overlay-copy .zyrn-btn {
+    justify-self: start;
+    margin-top: 4px;
+  }
+
   .gallery__tab-copy {
     display: grid;
     gap: 6px;

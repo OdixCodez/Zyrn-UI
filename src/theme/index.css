@@ -23,5 +23,9 @@
 @import '../components/Container/Container.css' layer(zyrn.components);
 @import '../components/VisuallyHidden/VisuallyHidden.css' layer(zyrn.components);
 @import '../components/Modal/Modal.css' layer(zyrn.components);
+@import '../components/Popover/Popover.css' layer(zyrn.components);
+@import '../components/AlertDialog/AlertDialog.css' layer(zyrn.components);
+@import '../components/Drawer/Drawer.css' layer(zyrn.components);
+@import '../components/ContextMenu/ContextMenu.css' layer(zyrn.components);
 @import '../components/Dropdown/Dropdown.css' layer(zyrn.components);
 @import '../components/Toast/Toast.css' layer(zyrn.components);

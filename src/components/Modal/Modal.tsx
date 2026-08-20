@@ -12,6 +12,7 @@ export interface ZyrnModalProps {
   size?: ZyrnModalSize;
   closeLabel?: string;
   closeOnOverlayClick?: boolean;
+  role?: 'dialog' | 'alertdialog';
   className?: string;
 }
 
@@ -34,6 +35,7 @@ export const ZyrnModal = React.forwardRef<HTMLDivElement, ZyrnModalProps>(functi
     size = 'md',
     closeLabel = 'Close dialog',
     closeOnOverlayClick = true,
+    role = 'dialog',
     className = '',
   },
   forwardedRef,
@@ -120,7 +122,7 @@ export const ZyrnModal = React.forwardRef<HTMLDivElement, ZyrnModalProps>(functi
       <div
         ref={setRefs}
         className={['zyrn-modal', `zyrn-modal--${size}`, className].filter(Boolean).join(' ')}
-        role="dialog"
+        role={role}
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={description ? descriptionId : undefined}
