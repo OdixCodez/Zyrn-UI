@@ -4,11 +4,15 @@ import {
   ZyrnBadge,
   ZyrnButton,
   ZyrnCard,
+  ZyrnCheckbox,
   ZyrnDropdown,
   ZyrnDropdownItem,
   ZyrnInput,
   ZyrnModal,
+  ZyrnRadioGroup,
   ZyrnSelect,
+  ZyrnSegmentedControl,
+  ZyrnSwitch,
   ZyrnTextarea,
   ZyrnThemeProvider,
   ZyrnToastProvider,
@@ -31,6 +35,10 @@ function ThemeToggle() {
 function GalleryContent() {
   const [submitted, setSubmitted] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [armed, setArmed] = useState(true);
+  const [telemetry, setTelemetry] = useState(false);
+  const [channel, setChannel] = useState('stable');
+  const [density, setDensity] = useState('normal');
   const { toast } = useZyrnToast();
 
   return (
@@ -85,6 +93,46 @@ function GalleryContent() {
               <ZyrnButton type="submit" kanji="実行">Execute</ZyrnButton>
               {submitted && <ZyrnBadge variant="success" role="status">Submitted</ZyrnBadge>}
             </form>
+          </ZyrnCard>
+
+          <ZyrnCard titleText="Selections" subText="state / keyboard / forms" kanjiStamp="選">
+            <div className="gallery__form">
+              <ZyrnCheckbox
+                label="Arm deployment"
+                kanji="準備"
+                description="Confirm the release sequence can proceed."
+                checked={armed}
+                onChange={(event) => setArmed(event.target.checked)}
+              />
+              <ZyrnSwitch
+                label="Telemetry stream"
+                kanji="監視"
+                checked={telemetry}
+                onChange={(event) => setTelemetry(event.target.checked)}
+              />
+              <ZyrnRadioGroup
+                label="Release channel"
+                kanji="経路"
+                value={channel}
+                onValueChange={setChannel}
+                options={[
+                  { value: 'stable', label: 'Stable', description: 'Recommended production channel.' },
+                  { value: 'edge', label: 'Edge', description: 'Early access updates.' },
+                ]}
+              />
+              <ZyrnSegmentedControl
+                label="Interface density"
+                kanji="密度"
+                value={density}
+                onValueChange={setDensity}
+                fullWidth
+                options={[
+                  { value: 'compact', label: 'Compact' },
+                  { value: 'normal', label: 'Normal' },
+                  { value: 'spacious', label: 'Spacious' },
+                ]}
+              />
+            </div>
           </ZyrnCard>
 
           <ZyrnCard titleText="Badges" subText="status / semantic" kanjiStamp="印" variant="vermilion">

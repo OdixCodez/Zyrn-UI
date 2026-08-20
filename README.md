@@ -139,6 +139,42 @@ It accepts `label`, `kanji`, `description`, `error`, `size`, `fullWidth`, `place
 | `kanji` | `React.ReactNode` | — | Decorative Japanese accent. |
 | `dot` | `boolean` | `false` | Adds a decorative status dot. |
 
+### Selection controls
+
+`ZyrnCheckbox`, `ZyrnSwitch`, `ZyrnRadioGroup`, and `ZyrnSegmentedControl` share the same description and error contract as the existing input controls. They can be controlled or uncontrolled where the underlying interaction model allows it and all support the supplied ink and paper themes.
+
+```tsx
+<ZyrnCheckbox label="Arm deployment" kanji="準備" checked={armed} onChange={(event) => setArmed(event.target.checked)} />
+<ZyrnSwitch label="Telemetry stream" checked={telemetry} onChange={(event) => setTelemetry(event.target.checked)} />
+
+<ZyrnRadioGroup
+  label="Release channel"
+  defaultValue="stable"
+  options={[
+    { value: 'stable', label: 'Stable' },
+    { value: 'edge', label: 'Edge' },
+  ]}
+/>
+
+<ZyrnSegmentedControl
+  label="Interface density"
+  value={density}
+  onValueChange={setDensity}
+  options={[
+    { value: 'compact', label: 'Compact' },
+    { value: 'normal', label: 'Normal' },
+    { value: 'spacious', label: 'Spacious' },
+  ]}
+/>
+```
+
+| Component | Key props | Interaction behavior |
+|---|---|---|
+| `ZyrnCheckbox` | `label`, `checked`, `defaultChecked`, `indeterminate`, `description`, `error` | Native checkbox semantics; supports an `indeterminate` mixed state. |
+| `ZyrnSwitch` | `label`, `checked`, `defaultChecked`, `description`, `error` | Native checkbox with `role="switch"` semantics for immediate settings. |
+| `ZyrnRadioGroup` | `label`, `options`, `value`, `defaultValue`, `onValueChange`, `orientation` | Uses native radio controls for mutual exclusion and arrow-key selection. |
+| `ZyrnSegmentedControl` | `label`, `options`, `value`, `defaultValue`, `onValueChange` | Uses a radio-group pattern with roving focus and arrow, Home, and End navigation. |
+
 ### `ZyrnModal`
 
 `ZyrnModal` is a controlled dialog with labelled semantics, Escape-to-close behavior, focus containment, focus restoration, scroll locking, and an optional overlay-click close action. Keep it under your `ZyrnThemeProvider` so it inherits the scoped theme.
@@ -366,11 +402,15 @@ src/
 │   ├── Badge/
 │   ├── Button/
 │   ├── Card/
-│   ├── Field/
+│   ├── Checkbox/
 │   ├── Dropdown/
+│   ├── Field/
 │   ├── Input/
 │   ├── Modal/
+│   ├── RadioGroup/
+│   ├── SegmentedControl/
 │   ├── Select/
+│   ├── Switch/
 │   ├── Textarea/
 │   └── Toast/
 ├── theme/

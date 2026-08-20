@@ -1,0 +1,98 @@
+.zyrn-checkbox {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: fit-content;
+  cursor: pointer;
+  color: var(--zyrn-color-text);
+}
+
+.zyrn-checkbox--disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.zyrn-checkbox__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.zyrn-checkbox__box {
+  display: grid;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border: 1px solid var(--zyrn-color-border-strong);
+  border-radius: var(--zyrn-radius);
+  background: var(--zyrn-color-background);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+  color: var(--zyrn-ink-text);
+}
+
+.zyrn-checkbox__mark,
+.zyrn-checkbox__dash {
+  display: none;
+  font-family: var(--zyrn-font-mono);
+  font-size: 0.9rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.zyrn-checkbox__input:checked + .zyrn-checkbox__box,
+.zyrn-checkbox__input[aria-checked="mixed"] + .zyrn-checkbox__box {
+  border-color: var(--zyrn-color-brand);
+  background: var(--zyrn-color-brand);
+}
+
+.zyrn-checkbox__input:checked + .zyrn-checkbox__box .zyrn-checkbox__mark {
+  display: block;
+}
+
+.zyrn-checkbox__input[aria-checked="mixed"] + .zyrn-checkbox__box .zyrn-checkbox__dash {
+  display: block;
+}
+
+.zyrn-checkbox__input:focus-visible + .zyrn-checkbox__box {
+  outline: 2px solid var(--zyrn-color-focus);
+  outline-offset: 3px;
+}
+
+.zyrn-checkbox__content {
+  display: grid;
+  gap: 3px;
+  padding-top: 1px;
+}
+
+.zyrn-checkbox__label {
+  font-family: var(--zyrn-font-ui);
+  font-size: var(--zyrn-text-body);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.zyrn-checkbox__kanji {
+  color: var(--zyrn-color-brand);
+  font-family: var(--zyrn-font-mincho);
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.zyrn-checkbox--sm .zyrn-checkbox__box {
+  width: 16px;
+  height: 16px;
+}
+
+.zyrn-checkbox--sm .zyrn-checkbox__label {
+  font-size: var(--zyrn-text-body-sm);
+}
+
+.zyrn-checkbox--lg .zyrn-checkbox__box {
+  width: 24px;
+  height: 24px;
+}

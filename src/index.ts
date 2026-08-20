@@ -21,6 +21,18 @@ export type { ZyrnSelectProps } from './components/Select';
 export { ZyrnBadge } from './components/Badge';
 export type { ZyrnBadgeProps, ZyrnBadgeSize, ZyrnBadgeVariant } from './components/Badge';
 
+export { ZyrnCheckbox } from './components/Checkbox';
+export type { ZyrnCheckboxProps } from './components/Checkbox';
+
+export { ZyrnSwitch } from './components/Switch';
+export type { ZyrnSwitchProps } from './components/Switch';
+
+export { ZyrnRadioGroup } from './components/RadioGroup';
+export type { ZyrnRadioGroupOrientation, ZyrnRadioGroupProps, ZyrnRadioOption } from './components/RadioGroup';
+
+export { ZyrnSegmentedControl } from './components/SegmentedControl';
+export type { ZyrnSegmentedControlProps, ZyrnSegmentedOption } from './components/SegmentedControl';
+
 export { ZyrnModal } from './components/Modal';
 export type { ZyrnModalProps, ZyrnModalSize } from './components/Modal';
 

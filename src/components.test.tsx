@@ -5,11 +5,15 @@ import {
   ZyrnBadge,
   ZyrnButton,
   ZyrnCard,
+  ZyrnCheckbox,
   ZyrnDropdown,
   ZyrnDropdownItem,
   ZyrnInput,
   ZyrnModal,
+  ZyrnRadioGroup,
   ZyrnSelect,
+  ZyrnSegmentedControl,
+  ZyrnSwitch,
   ZyrnTextarea,
   ZyrnThemeProvider,
   ZyrnToastProvider,
@@ -154,6 +158,46 @@ describe('ZyrnToastProvider', () => {
     expect(screen.getByRole('status')).toHaveTextContent('Saved');
     fireEvent.click(screen.getByRole('button', { name: 'Dismiss notification' }));
     await waitFor(() => expect(screen.queryByRole('status')).not.toBeInTheDocument());
+  });
+});
+
+describe('Selection controls', () => {
+  it('supports checkbox mixed state, switch toggling, radio selection, and segmented keyboard navigation', async () => {
+    render(
+      <>
+        <ZyrnCheckbox label="Select all" indeterminate />
+        <ZyrnSwitch label="Telemetry" />
+        <ZyrnRadioGroup
+          label="Channel"
+          defaultValue="stable"
+          options={[
+            { value: 'stable', label: 'Stable' },
+            { value: 'edge', label: 'Edge' },
+          ]}
+        />
+        <ZyrnSegmentedControl
+          label="Density"
+          defaultValue="normal"
+          options={[
+            { value: 'compact', label: 'Compact' },
+            { value: 'normal', label: 'Normal' },
+            { value: 'spacious', label: 'Spacious' },
+          ]}
+        />
+      </>,
+    );
+
+    expect(screen.getByRole('checkbox', { name: 'Select all' })).toBePartiallyChecked();
+    const switchControl = screen.getByRole('switch', { name: 'Telemetry' });
+    fireEvent.click(switchControl);
+    expect(switchControl).toBeChecked();
+
+    fireEvent.click(screen.getByRole('radio', { name: 'Edge' }));
+    expect(screen.getByRole('radio', { name: 'Edge' })).toBeChecked();
+
+    const normal = screen.getByRole('radio', { name: 'Normal' });
+    fireEvent.keyDown(normal, { key: 'ArrowRight' });
+    await waitFor(() => expect(screen.getByRole('radio', { name: 'Spacious' })).toHaveAttribute('aria-checked', 'true'));
   });
 });
 

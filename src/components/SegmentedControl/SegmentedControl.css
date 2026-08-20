@@ -1,0 +1,98 @@
+.zyrn-segmented-control {
+  display: grid;
+  gap: 9px;
+}
+
+.zyrn-segmented-control__label {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  color: var(--zyrn-color-text);
+  font-family: var(--zyrn-font-ui);
+  font-size: var(--zyrn-text-label);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.zyrn-segmented-control__kanji {
+  color: var(--zyrn-color-brand);
+  font-family: var(--zyrn-font-mincho);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.zyrn-segmented-control__group {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid var(--zyrn-color-border-strong);
+  border-radius: var(--zyrn-radius);
+  background: var(--zyrn-color-surface-elevated);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.zyrn-field--fullWidth .zyrn-segmented-control__group {
+  width: 100%;
+}
+
+.zyrn-segmented-control__segment {
+  flex: 1 1 auto;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-right: 1px solid var(--zyrn-color-border);
+  border-radius: var(--zyrn-radius);
+  background: transparent;
+  color: var(--zyrn-color-text-secondary);
+  cursor: pointer;
+  font-family: var(--zyrn-font-ui);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.zyrn-segmented-control__segment:last-child {
+  border-right: 0;
+}
+
+.zyrn-segmented-control__segment:hover:not(:disabled) {
+  background: var(--zyrn-color-surface-hover);
+  color: var(--zyrn-color-text);
+}
+
+.zyrn-segmented-control__segment--selected {
+  background: var(--zyrn-color-brand);
+  color: var(--zyrn-ink-text);
+}
+
+.zyrn-segmented-control__segment:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid var(--zyrn-color-focus);
+  outline-offset: -2px;
+}
+
+.zyrn-segmented-control__segment:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.zyrn-segmented-control--disabled {
+  opacity: 0.65;
+}
+
+.zyrn-segmented-control--sm .zyrn-segmented-control__segment {
+  min-height: 34px;
+  padding: 0 10px;
+  font-size: 0.68rem;
+}
+
+.zyrn-segmented-control--lg .zyrn-segmented-control__segment {
+  min-height: 48px;
+  padding: 0 18px;
+  font-size: 0.82rem;
+}
