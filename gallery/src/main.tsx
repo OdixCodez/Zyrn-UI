@@ -13,7 +13,10 @@ import {
   ZyrnSelect,
   ZyrnSegmentedControl,
   ZyrnSwitch,
+  ZyrnTabs,
   ZyrnTextarea,
+  ZyrnTooltip,
+  ZyrnSeparator,
   ZyrnThemeProvider,
   ZyrnToastProvider,
   useZyrnTheme,
@@ -39,6 +42,7 @@ function GalleryContent() {
   const [telemetry, setTelemetry] = useState(false);
   const [channel, setChannel] = useState('stable');
   const [density, setDensity] = useState('normal');
+  const [systemTab, setSystemTab] = useState('runtime');
   const { toast } = useZyrnToast();
 
   return (
@@ -132,6 +136,43 @@ function GalleryContent() {
                   { value: 'spacious', label: 'Spacious' },
                 ]}
               />
+            </div>
+          </ZyrnCard>
+
+          <ZyrnCard titleText="Navigation" subText="context / hierarchy / shortcuts" kanjiStamp="道">
+            <div className="gallery__stack">
+              <ZyrnTabs
+                label="System views"
+                value={systemTab}
+                onValueChange={setSystemTab}
+                fullWidth
+                tabs={[
+                  {
+                    value: 'runtime',
+                    label: 'Runtime',
+                    content: <div className="gallery__tab-copy"><strong>Runtime nominal.</strong><span>All observable services are reporting within expected thresholds.</span></div>,
+                  },
+                  {
+                    value: 'signals',
+                    label: 'Signals',
+                    content: <div className="gallery__tab-copy"><strong>Signals monitored.</strong><span>Telemetry is sampled continuously and retained for review.</span></div>,
+                  },
+                  {
+                    value: 'archive',
+                    label: 'Archive',
+                    content: <div className="gallery__tab-copy"><strong>Archive sealed.</strong><span>Deployment records are available to authorized operators.</span></div>,
+                  },
+                ]}
+              />
+              <ZyrnSeparator weight="medium" />
+              <div className="gallery__row">
+                <ZyrnTooltip content="Hover or focus to reveal the deployment protocol." placement="bottom">
+                  <ZyrnButton variant="outline" kanji="鍵">Protocol help</ZyrnButton>
+                </ZyrnTooltip>
+                <ZyrnTooltip content="This tooltip opens on focus too, then closes with Escape." placement="bottom">
+                  <ZyrnButton variant="secondary" aria-label="Keyboard guidance">Keyboard guidance</ZyrnButton>
+                </ZyrnTooltip>
+              </div>
             </div>
           </ZyrnCard>
 

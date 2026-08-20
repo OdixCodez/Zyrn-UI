@@ -175,6 +175,34 @@ It accepts `label`, `kanji`, `description`, `error`, `size`, `fullWidth`, `place
 | `ZyrnRadioGroup` | `label`, `options`, `value`, `defaultValue`, `onValueChange`, `orientation` | Uses native radio controls for mutual exclusion and arrow-key selection. |
 | `ZyrnSegmentedControl` | `label`, `options`, `value`, `defaultValue`, `onValueChange` | Uses a radio-group pattern with roving focus and arrow, Home, and End navigation. |
 
+### Navigation and layout primitives
+
+`ZyrnTabs`, `ZyrnTooltip`, and `ZyrnSeparator` provide a compact layer of navigation and hierarchy primitives. They share the package theme tokens and CSS layer while preserving familiar WAI-ARIA interaction patterns.
+
+```tsx
+<ZyrnTabs
+  label="System views"
+  value={view}
+  onValueChange={setView}
+  tabs={[
+    { value: 'runtime', label: 'Runtime', content: <RuntimePanel /> },
+    { value: 'signals', label: 'Signals', content: <SignalsPanel /> },
+  ]}
+/>
+
+<ZyrnTooltip content="Keyboard shortcut: Shift + K">
+  <ZyrnButton>Protocol help</ZyrnButton>
+</ZyrnTooltip>
+
+<ZyrnSeparator weight="medium" />
+```
+
+| Component | Key props | Interaction and semantics |
+|---|---|---|
+| `ZyrnTabs` | `tabs`, `value`, `defaultValue`, `onValueChange`, `orientation`, `fullWidth` | Controlled or uncontrolled tabs with labelled tablist/panel relationships; Arrow keys, Home, and End move selection while skipping disabled tabs. |
+| `ZyrnTooltip` | `content`, `placement`, `delayDuration` | Opens on focus and delayed hover, links the trigger with `aria-describedby`, and closes on blur, mouse leave, or Escape. The child must be a single interactive React element. |
+| `ZyrnSeparator` | `orientation`, `weight`, `decorative`, `label` | Decorative by default; setting `label` or `decorative={false}` emits semantic separator behavior. |
+
 ### `ZyrnModal`
 
 `ZyrnModal` is a controlled dialog with labelled semantics, Escape-to-close behavior, focus containment, focus restoration, scroll locking, and an optional overlay-click close action. Keep it under your `ZyrnThemeProvider` so it inherits the scoped theme.
@@ -410,9 +438,12 @@ src/
 │   ├── RadioGroup/
 │   ├── SegmentedControl/
 │   ├── Select/
+│   ├── Separator/
 │   ├── Switch/
+│   ├── Tabs/
 │   ├── Textarea/
-│   └── Toast/
+│   ├── Toast/
+│   └── Tooltip/
 ├── theme/
 │   ├── index.css
 │   ├── themes.css

@@ -138,6 +138,17 @@
     gap: 10px;
   }
 
+  .gallery__tab-copy {
+    display: grid;
+    gap: 6px;
+    line-height: 1.5;
+  }
+
+  .gallery__tab-copy span {
+    color: var(--zyrn-color-text-secondary);
+    font-size: 0.85rem;
+  }
+
   .gallery__form .zyrn-field {
     width: 100%;
   }

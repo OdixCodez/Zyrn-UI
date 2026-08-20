@@ -1,0 +1,39 @@
+.zyrn-separator {
+  flex: 0 0 auto;
+  background: var(--zyrn-color-border);
+}
+
+.zyrn-separator--horizontal {
+  width: 100%;
+  height: 1px;
+}
+
+.zyrn-separator--vertical {
+  width: 1px;
+  align-self: stretch;
+  min-height: 1.5rem;
+}
+
+.zyrn-separator--medium {
+  background: var(--zyrn-color-border-strong);
+}
+
+.zyrn-separator--strong {
+  background: var(--zyrn-color-brand);
+}
+
+.zyrn-separator--horizontal.zyrn-separator--medium {
+  height: 2px;
+}
+
+.zyrn-separator--vertical.zyrn-separator--medium {
+  width: 2px;
+}
+
+.zyrn-separator--horizontal.zyrn-separator--strong {
+  height: 3px;
+}
+
+.zyrn-separator--vertical.zyrn-separator--strong {
+  width: 3px;
+}

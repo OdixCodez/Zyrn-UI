@@ -33,6 +33,15 @@ export type { ZyrnRadioGroupOrientation, ZyrnRadioGroupProps, ZyrnRadioOption } 
 export { ZyrnSegmentedControl } from './components/SegmentedControl';
 export type { ZyrnSegmentedControlProps, ZyrnSegmentedOption } from './components/SegmentedControl';
 
+export { ZyrnTabs } from './components/Tabs';
+export type { ZyrnTabItem, ZyrnTabsOrientation, ZyrnTabsProps, ZyrnTabsSize } from './components/Tabs';
+
+export { ZyrnTooltip } from './components/Tooltip';
+export type { ZyrnTooltipPlacement, ZyrnTooltipProps } from './components/Tooltip';
+
+export { ZyrnSeparator } from './components/Separator';
+export type { ZyrnSeparatorOrientation, ZyrnSeparatorProps, ZyrnSeparatorWeight } from './components/Separator';
+
 export { ZyrnModal } from './components/Modal';
 export type { ZyrnModalProps, ZyrnModalSize } from './components/Modal';
 
