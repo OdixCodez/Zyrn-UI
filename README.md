@@ -175,6 +175,43 @@ It accepts `label`, `kanji`, `description`, `error`, `size`, `fullWidth`, `place
 | `ZyrnRadioGroup` | `label`, `options`, `value`, `defaultValue`, `onValueChange`, `orientation` | Uses native radio controls for mutual exclusion and arrow-key selection. |
 | `ZyrnSegmentedControl` | `label`, `options`, `value`, `defaultValue`, `onValueChange` | Uses a radio-group pattern with roving focus and arrow, Home, and End navigation. |
 
+### Layout primitives
+
+`ZyrnStack`, `ZyrnInline`, `ZyrnGrid`, and `ZyrnContainer` establish a small composition system built on the new `ZyrnSpace` scale (`0` through `8`). Each accepts an `as` prop for semantic wrapper elements, such as `main`, `section`, or `nav`.
+
+```tsx
+<ZyrnContainer as="main" size="lg" padding={4}>
+  <ZyrnStack gap={6}>
+    <ZyrnInline as="nav" justify="between" gap={3}>
+      <ZyrnButton>Save</ZyrnButton>
+      <ZyrnButton>Deploy</ZyrnButton>
+    </ZyrnInline>
+
+    <ZyrnGrid minItemWidth="16rem" gap={4}>
+      <ZyrnCard titleText="Runtime">...</ZyrnCard>
+      <ZyrnCard titleText="Signals">...</ZyrnCard>
+    </ZyrnGrid>
+  </ZyrnStack>
+</ZyrnContainer>
+```
+
+| Primitive | Key props | Purpose |
+|---|---|---|
+| `ZyrnStack` | `gap`, `align`, `divider`, `as` | Vertical composition with optional borders between successive children. |
+| `ZyrnInline` | `gap`, `align`, `justify`, `wrap`, `as` | Wrapping horizontal composition for actions, badges, and compact control groups. |
+| `ZyrnGrid` | `columns`, `minItemWidth`, `gap`, `as` | Fixed-column or responsive auto-fit grid composition. |
+| `ZyrnContainer` | `size`, `padding`, `as` | Centered content widths from `sm` through `xl`, plus a full-width option. |
+| `ZyrnVisuallyHidden` | `as` | Screen-reader-visible content that is visually clipped until it or a descendant receives focus. |
+
+Use `ZyrnVisuallyHidden` to give icon-only actions an accessible label without adding persistent visible text.
+
+```tsx
+<button type="button">
+  <span aria-hidden="true">?</span>
+  <ZyrnVisuallyHidden>Inspect system signal</ZyrnVisuallyHidden>
+</button>
+```
+
 ### Navigation and layout primitives
 
 `ZyrnTabs`, `ZyrnTooltip`, and `ZyrnSeparator` provide a compact layer of navigation and hierarchy primitives. They share the package theme tokens and CSS layer while preserving familiar WAI-ARIA interaction patterns.
@@ -431,19 +468,24 @@ src/
 │   ├── Button/
 │   ├── Card/
 │   ├── Checkbox/
+│   ├── Container/
 │   ├── Dropdown/
 │   ├── Field/
+│   ├── Grid/
+│   ├── Inline/
 │   ├── Input/
 │   ├── Modal/
 │   ├── RadioGroup/
 │   ├── SegmentedControl/
 │   ├── Select/
 │   ├── Separator/
+│   ├── Stack/
 │   ├── Switch/
 │   ├── Tabs/
 │   ├── Textarea/
 │   ├── Toast/
-│   └── Tooltip/
+│   ├── Tooltip/
+│   └── VisuallyHidden/
 ├── theme/
 │   ├── index.css
 │   ├── themes.css

@@ -144,6 +144,52 @@
     line-height: 1.5;
   }
 
+  .gallery__layout-label {
+    font-family: var(--zyrn-font-ui);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .gallery__layout-cell {
+    display: grid;
+    min-height: 72px;
+    place-items: center;
+    border: 1px solid var(--zyrn-color-border);
+    background: var(--zyrn-color-surface-elevated);
+    color: var(--zyrn-color-text-secondary);
+    font-family: var(--zyrn-font-mono);
+    font-size: 0.72rem;
+    text-align: center;
+  }
+
+  .gallery__layout-note {
+    color: var(--zyrn-color-text-muted);
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  .gallery__signal-button {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    border: 1px solid var(--zyrn-color-border-strong);
+    border-radius: var(--zyrn-radius);
+    background: transparent;
+    color: var(--zyrn-color-text);
+    cursor: pointer;
+    font-family: var(--zyrn-font-mono);
+    font-weight: 800;
+  }
+
+  .gallery__signal-button:hover,
+  .gallery__signal-button:focus-visible {
+    border-color: var(--zyrn-color-brand);
+    background: var(--zyrn-color-brand);
+    color: var(--zyrn-ink-text);
+    outline: none;
+  }
+
   .gallery__tab-copy span {
     color: var(--zyrn-color-text-secondary);
     font-size: 0.85rem;

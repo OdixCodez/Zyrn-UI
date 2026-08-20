@@ -1,0 +1,14 @@
+.zyrn-grid {
+  display: grid;
+  width: 100%;
+}
+
+.zyrn-grid--gap-0 { gap: var(--zyrn-space-0); }
+.zyrn-grid--gap-1 { gap: var(--zyrn-space-1); }
+.zyrn-grid--gap-2 { gap: var(--zyrn-space-2); }
+.zyrn-grid--gap-3 { gap: var(--zyrn-space-3); }
+.zyrn-grid--gap-4 { gap: var(--zyrn-space-4); }
+.zyrn-grid--gap-5 { gap: var(--zyrn-space-5); }
+.zyrn-grid--gap-6 { gap: var(--zyrn-space-6); }
+.zyrn-grid--gap-7 { gap: var(--zyrn-space-7); }
+.zyrn-grid--gap-8 { gap: var(--zyrn-space-8); }

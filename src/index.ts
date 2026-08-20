@@ -42,6 +42,21 @@ export type { ZyrnTooltipPlacement, ZyrnTooltipProps } from './components/Toolti
 export { ZyrnSeparator } from './components/Separator';
 export type { ZyrnSeparatorOrientation, ZyrnSeparatorProps, ZyrnSeparatorWeight } from './components/Separator';
 
+export { ZyrnStack } from './components/Stack';
+export type { ZyrnAlign, ZyrnSpace, ZyrnStackProps } from './components/Stack';
+
+export { ZyrnInline } from './components/Inline';
+export type { ZyrnInlineProps, ZyrnJustify } from './components/Inline';
+
+export { ZyrnGrid } from './components/Grid';
+export type { ZyrnGridColumns, ZyrnGridProps } from './components/Grid';
+
+export { ZyrnContainer } from './components/Container';
+export type { ZyrnContainerProps, ZyrnContainerSize } from './components/Container';
+
+export { ZyrnVisuallyHidden } from './components/VisuallyHidden';
+export type { ZyrnVisuallyHiddenProps } from './components/VisuallyHidden';
+
 export { ZyrnModal } from './components/Modal';
 export type { ZyrnModalProps, ZyrnModalSize } from './components/Modal';
 

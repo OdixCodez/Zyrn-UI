@@ -29,3 +29,16 @@
   --zyrn-border-ink-strong: rgba(242, 240, 234, 0.18);
   --zyrn-border-focus: rgba(181, 31, 46, 0.75);
 }
+
+:root {
+  /* Layout spacing scale */
+  --zyrn-space-0: 0;
+  --zyrn-space-1: 0.25rem;
+  --zyrn-space-2: 0.5rem;
+  --zyrn-space-3: 0.75rem;
+  --zyrn-space-4: 1rem;
+  --zyrn-space-5: 1.5rem;
+  --zyrn-space-6: 2rem;
+  --zyrn-space-7: 3rem;
+  --zyrn-space-8: 4rem;
+}

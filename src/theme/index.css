@@ -17,6 +17,11 @@
 @import '../components/Tabs/Tabs.css' layer(zyrn.components);
 @import '../components/Tooltip/Tooltip.css' layer(zyrn.components);
 @import '../components/Separator/Separator.css' layer(zyrn.components);
+@import '../components/Stack/Stack.css' layer(zyrn.components);
+@import '../components/Inline/Inline.css' layer(zyrn.components);
+@import '../components/Grid/Grid.css' layer(zyrn.components);
+@import '../components/Container/Container.css' layer(zyrn.components);
+@import '../components/VisuallyHidden/VisuallyHidden.css' layer(zyrn.components);
 @import '../components/Modal/Modal.css' layer(zyrn.components);
 @import '../components/Dropdown/Dropdown.css' layer(zyrn.components);
 @import '../components/Toast/Toast.css' layer(zyrn.components);

@@ -5,18 +5,23 @@ import {
   ZyrnButton,
   ZyrnCard,
   ZyrnCheckbox,
+  ZyrnContainer,
   ZyrnDropdown,
   ZyrnDropdownItem,
+  ZyrnGrid,
+  ZyrnInline,
   ZyrnInput,
   ZyrnModal,
   ZyrnRadioGroup,
   ZyrnSelect,
   ZyrnSegmentedControl,
+  ZyrnStack,
   ZyrnSwitch,
   ZyrnTabs,
   ZyrnTextarea,
   ZyrnTooltip,
   ZyrnSeparator,
+  ZyrnVisuallyHidden,
   ZyrnThemeProvider,
   ZyrnToastProvider,
   useZyrnTheme,
@@ -137,6 +142,34 @@ function GalleryContent() {
                 ]}
               />
             </div>
+          </ZyrnCard>
+
+          <ZyrnCard titleText="Layout primitives" subText="composition / rhythm / structure" kanjiStamp="組" variant="parchment">
+            <ZyrnContainer size="full" padding={0}>
+              <ZyrnStack gap={4} divider>
+                <ZyrnInline justify="between" gap={3}>
+                  <strong className="gallery__layout-label">Stack + Inline</strong>
+                  <ZyrnInline gap={2}>
+                    <ZyrnBadge variant="info">Inline</ZyrnBadge>
+                    <ZyrnBadge variant="success">Ready</ZyrnBadge>
+                  </ZyrnInline>
+                </ZyrnInline>
+                <ZyrnGrid minItemWidth="8rem" gap={3}>
+                  <div className="gallery__layout-cell">Auto-fit grid</div>
+                  <div className="gallery__layout-cell">Responsive</div>
+                  <div className="gallery__layout-cell">Token gaps</div>
+                </ZyrnGrid>
+                <ZyrnInline justify="between" align="center">
+                  <span className="gallery__layout-note">The icon is labelled for screen readers only.</span>
+                  <ZyrnTooltip content="This button has a visually hidden accessible name." placement="left">
+                    <button className="gallery__signal-button" type="button" onClick={() => toast({ title: 'Signal inspected', variant: 'info' })}>
+                      <span aria-hidden="true">?</span>
+                      <ZyrnVisuallyHidden>Inspect system signal</ZyrnVisuallyHidden>
+                    </button>
+                  </ZyrnTooltip>
+                </ZyrnInline>
+              </ZyrnStack>
+            </ZyrnContainer>
           </ZyrnCard>
 
           <ZyrnCard titleText="Navigation" subText="context / hierarchy / shortcuts" kanjiStamp="道">

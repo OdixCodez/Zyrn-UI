@@ -1,0 +1,27 @@
+.zyrn-inline {
+  display: flex;
+}
+
+.zyrn-inline--wrap { flex-wrap: wrap; }
+
+.zyrn-inline--gap-0 { gap: var(--zyrn-space-0); }
+.zyrn-inline--gap-1 { gap: var(--zyrn-space-1); }
+.zyrn-inline--gap-2 { gap: var(--zyrn-space-2); }
+.zyrn-inline--gap-3 { gap: var(--zyrn-space-3); }
+.zyrn-inline--gap-4 { gap: var(--zyrn-space-4); }
+.zyrn-inline--gap-5 { gap: var(--zyrn-space-5); }
+.zyrn-inline--gap-6 { gap: var(--zyrn-space-6); }
+.zyrn-inline--gap-7 { gap: var(--zyrn-space-7); }
+.zyrn-inline--gap-8 { gap: var(--zyrn-space-8); }
+
+.zyrn-inline--align-start { align-items: flex-start; }
+.zyrn-inline--align-center { align-items: center; }
+.zyrn-inline--align-end { align-items: flex-end; }
+.zyrn-inline--align-stretch { align-items: stretch; }
+
+.zyrn-inline--justify-start { justify-content: flex-start; }
+.zyrn-inline--justify-center { justify-content: center; }
+.zyrn-inline--justify-end { justify-content: flex-end; }
+.zyrn-inline--justify-between { justify-content: space-between; }
+.zyrn-inline--justify-around { justify-content: space-around; }
+.zyrn-inline--justify-evenly { justify-content: space-evenly; }
