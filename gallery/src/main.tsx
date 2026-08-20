@@ -12,14 +12,17 @@ import {
   ZyrnDrawer,
   ZyrnDropdown,
   ZyrnDropdownItem,
+  ZyrnEmptyState,
   ZyrnGrid,
   ZyrnInline,
   ZyrnInput,
   ZyrnModal,
   ZyrnPopover,
+  ZyrnProgress,
   ZyrnRadioGroup,
   ZyrnSelect,
   ZyrnSegmentedControl,
+  ZyrnSkeleton,
   ZyrnStack,
   ZyrnSwitch,
   ZyrnTabs,
@@ -52,6 +55,8 @@ function GalleryContent() {
   const [alertDialogOpen, setAlertDialogOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [alertVisible, setAlertVisible] = useState(true);
+  const [releaseProgress, setReleaseProgress] = useState(68);
+  const [loadingReport, setLoadingReport] = useState(true);
   const [armed, setArmed] = useState(true);
   const [telemetry, setTelemetry] = useState(false);
   const [channel, setChannel] = useState('stable');
@@ -225,6 +230,41 @@ function GalleryContent() {
               <ZyrnBadge variant="success" size="lg" dot>Success</ZyrnBadge>
               <ZyrnBadge variant="warning" dot>Warning</ZyrnBadge>
               <ZyrnBadge variant="danger" dot>Danger</ZyrnBadge>
+            </div>
+          </ZyrnCard>
+
+          <ZyrnCard titleText="Feedback states" subText="empty / progress / loading" kanjiStamp="状態" variant="parchment">
+            <div className="gallery__stack">
+              <ZyrnProgress
+                label="Release upload"
+                description="Uploading signed deployment assets."
+                value={releaseProgress}
+              />
+              <div className="gallery__row">
+                <ZyrnButton size="sm" variant="outline" onClick={() => setReleaseProgress((value) => Math.max(0, value - 10))}>Step back</ZyrnButton>
+                <ZyrnButton size="sm" onClick={() => setReleaseProgress((value) => Math.min(100, value + 10))}>Advance upload</ZyrnButton>
+              </div>
+              <section className="gallery__loading-preview" aria-busy={loadingReport} aria-label="Deployment report preview">
+                {loadingReport ? (
+                  <ZyrnStack gap={2}>
+                    <ZyrnSkeleton variant="text" lines={2} />
+                    <ZyrnSkeleton variant="rect" height="3.5rem" animate={false} />
+                  </ZyrnStack>
+                ) : (
+                  <p className="gallery__loading-copy"><strong>Report ready.</strong> The latest deployment passed its readiness checks.</p>
+                )}
+              </section>
+              <ZyrnButton size="sm" variant="outline" onClick={() => setLoadingReport((loading) => !loading)}>
+                {loadingReport ? 'Reveal report' : 'Show skeleton'}
+              </ZyrnButton>
+              <ZyrnEmptyState
+                size="sm"
+                stamp="空"
+                title="No deployment records"
+                description="Create a release to begin tracking deployment history."
+                primaryAction={{ label: 'Create release', onClick: () => toast({ title: 'Release draft created', variant: 'success' }) }}
+                secondaryAction={{ label: 'Read guide', onClick: () => toast({ title: 'Guide opened', variant: 'info' }) }}
+              />
             </div>
           </ZyrnCard>
 

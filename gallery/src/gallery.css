@@ -158,6 +158,26 @@
     margin-top: 4px;
   }
 
+  .gallery__loading-preview {
+    min-height: 92px;
+    padding-top: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border: 1px solid var(--zyrn-color-border);
+    background: var(--zyrn-color-surface-elevated);
+  }
+
+  .gallery__loading-copy {
+    margin: 0;
+    color: var(--zyrn-color-text-secondary);
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .gallery__loading-copy strong {
+    color: var(--zyrn-color-text);
+  }
+
   .gallery__tab-copy {
     display: grid;
     gap: 6px;

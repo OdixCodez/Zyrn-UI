@@ -164,6 +164,72 @@ It accepts `label`, `kanji`, `description`, `error`, `size`, `fullWidth`, `place
 | `dismissLabel` | `string` | `'Dismiss alert'` | Accessible name for the optional dismiss button. |
 | `...rest` | `HTMLAttributes<HTMLDivElement>` | — | Native root attributes such as `data-*`, `id`, and `aria-*`. |
 
+### `ZyrnEmptyState`
+
+`ZyrnEmptyState` is a semantic zero-data or first-use region with an accessible heading, optional descriptive copy, decorative mark, and up to two native actions. It uses a labelled `<section>` and keeps visual icon and stamp content out of the accessibility tree.
+
+```tsx
+<ZyrnEmptyState
+  stamp="空"
+  title="No deployment records"
+  description="Create a release to begin tracking deployment history."
+  primaryAction={{ label: 'Create release', onClick: createRelease }}
+  secondaryAction={{ label: 'Read guide', onClick: openGuide }}
+/>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---:|---|
+| `title` | `React.ReactNode` | — | Required accessible section heading. |
+| `description` | `React.ReactNode` | — | Optional explanation and next-step guidance. |
+| `icon` / `stamp` | `React.ReactNode` | — | Decorative visual mark; always hidden from assistive technologies. |
+| `primaryAction` / `secondaryAction` | `ZyrnEmptyStateAction` | — | Optional action descriptors with `label`, `onClick`, `disabled`, `type`, and `ariaLabel`. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Spacing and visual-density preset. |
+| `headingLevel` | `2 \| 3 \| 4 \| 5 \| 6` | `2` | Semantic heading level for the title. |
+
+### `ZyrnProgress`
+
+`ZyrnProgress` exposes a labelled `role="progressbar"` for long-running work. Passing a numeric `value` produces a determinate range; omitting `value` or passing `indeterminate` renders an activity state without numeric ARIA values. The indeterminate visual animation automatically stops for reduced-motion users.
+
+```tsx
+<ZyrnProgress
+  label="Release upload"
+  description="Uploading signed deployment assets."
+  value={68}
+/>
+
+<ZyrnProgress label="Indexing records" indeterminate />
+```
+
+| Prop | Type | Default | Description |
+|---|---|---:|---|
+| `label` | `React.ReactNode` | — | Required accessible progressbar label. |
+| `description` | `React.ReactNode` | — | Optional text linked through `aria-describedby`. |
+| `value` | `number` | — | Current determinate value; values are clamped to the configured range. |
+| `min` / `max` | `number` | `0` / `100` | Determinate range bounds. |
+| `valueText` | `string` | Computed percentage | Accessible value text; also used for the visible value label. |
+| `indeterminate` | `boolean` | `false` | Suppresses numeric ARIA values and marks active, unknown-duration work. |
+| `showValue` | `boolean` | `true` | Displays a visual value or `Working` status while keeping duplicate text hidden from assistive technologies. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Track-height preset. |
+
+### `ZyrnSkeleton`
+
+`ZyrnSkeleton` is a decorative layout placeholder for loading states. It is always `aria-hidden="true"`; place it inside a labelled, `aria-busy="true"` region whenever people need to be informed that content is loading. Its shimmer is disabled for `prefers-reduced-motion` users and can be disabled directly with `animate={false}`.
+
+```tsx
+<section aria-busy="true" aria-label="Loading deployment data">
+  <ZyrnSkeleton variant="text" lines={3} />
+  <ZyrnSkeleton variant="rect" height="9rem" />
+</section>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---:|---|
+| `variant` | `'text' \| 'circle' \| 'rect'` | `'rect'` | Placeholder geometry. |
+| `width` / `height` | `number \| string` | Variant-derived | Explicit dimensions; numeric values resolve to pixels. |
+| `lines` | `number` | `3` | Number of lines rendered for the `text` variant. |
+| `animate` | `boolean` | `true` | Enables shimmer unless reduced-motion preferences disable it. |
+
 ### Selection controls
 
 `ZyrnCheckbox`, `ZyrnSwitch`, `ZyrnRadioGroup`, and `ZyrnSegmentedControl` share the same description and error contract as the existing input controls. They can be controlled or uncontrolled where the underlying interaction model allows it and all support the supplied ink and paper themes.
@@ -600,6 +666,7 @@ src/
 ├── components/
 │   ├── Alert/
 │   ├── AlertDialog/
+│   ├── EmptyState/
 │   ├── Badge/
 │   ├── Button/
 │   ├── Card/
@@ -615,10 +682,12 @@ src/
 │   ├── Modal/
 │   ├── Overlay/
 │   ├── Popover/
+│   ├── Progress/
 │   ├── RadioGroup/
 │   ├── SegmentedControl/
 │   ├── Select/
 │   ├── Separator/
+│   ├── Skeleton/
 │   ├── Stack/
 │   ├── Switch/
 │   ├── Tabs/

@@ -11,6 +11,9 @@
 @import '../components/Select/Select.css' layer(zyrn.components);
 @import '../components/Badge/Badge.css' layer(zyrn.components);
 @import '../components/Alert/Alert.css' layer(zyrn.components);
+@import '../components/EmptyState/EmptyState.css' layer(zyrn.components);
+@import '../components/Progress/Progress.css' layer(zyrn.components);
+@import '../components/Skeleton/Skeleton.css' layer(zyrn.components);
 @import '../components/Checkbox/Checkbox.css' layer(zyrn.components);
 @import '../components/Switch/Switch.css' layer(zyrn.components);
 @import '../components/RadioGroup/RadioGroup.css' layer(zyrn.components);
