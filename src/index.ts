@@ -21,6 +21,22 @@ export type { ZyrnSelectProps } from './components/Select';
 export { ZyrnBadge } from './components/Badge';
 export type { ZyrnBadgeProps, ZyrnBadgeSize, ZyrnBadgeVariant } from './components/Badge';
 
+export { ZyrnModal } from './components/Modal';
+export type { ZyrnModalProps, ZyrnModalSize } from './components/Modal';
+
+export { ZyrnDropdown, ZyrnDropdownItem } from './components/Dropdown';
+export type { ZyrnDropdownAlign, ZyrnDropdownItemProps, ZyrnDropdownProps } from './components/Dropdown';
+
+export { ZyrnToast, ZyrnToastProvider, useZyrnToast } from './components/Toast';
+export type {
+  ZyrnToastContextValue,
+  ZyrnToastOptions,
+  ZyrnToastPosition,
+  ZyrnToastProps,
+  ZyrnToastProviderProps,
+  ZyrnToastVariant,
+} from './components/Toast';
+
 export { ZyrnThemeProvider, useZyrnTheme } from './theme/ThemeProvider';
 export type { ZyrnTheme, ZyrnThemeContextValue, ZyrnThemeProviderProps } from './theme/ThemeProvider';
 

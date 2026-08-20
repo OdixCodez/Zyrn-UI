@@ -1,0 +1,108 @@
+.zyrn-modal__backdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.72);
+  animation: zyrn-modal-fade-in 160ms ease-out;
+}
+
+.zyrn-modal {
+  width: min(100%, 620px);
+  max-height: min(760px, calc(100vh - 48px));
+  overflow: auto;
+  border: 1px solid var(--zyrn-color-border-strong);
+  border-radius: var(--zyrn-radius);
+  background: var(--zyrn-color-surface);
+  box-shadow: 10px 10px 0 var(--zyrn-color-brand);
+  color: var(--zyrn-color-text);
+  outline: none;
+  animation: zyrn-modal-strike-in 180ms var(--zyrn-ease-settle, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.zyrn-modal--sm {
+  max-width: 420px;
+}
+
+.zyrn-modal--lg {
+  max-width: 880px;
+}
+
+.zyrn-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 24px 18px;
+  border-bottom: 1px solid var(--zyrn-color-border);
+}
+
+.zyrn-modal__eyebrow {
+  margin: 0 0 7px;
+  color: var(--zyrn-color-brand);
+  font-family: var(--zyrn-font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.zyrn-modal__title {
+  margin: 0;
+  font-family: var(--zyrn-font-display);
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.zyrn-modal__description {
+  margin: 10px 0 0;
+  color: var(--zyrn-color-text-secondary);
+  line-height: 1.5;
+}
+
+.zyrn-modal__close {
+  display: grid;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--zyrn-color-border-strong);
+  border-radius: var(--zyrn-radius);
+  background: transparent;
+  color: var(--zyrn-color-text);
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.zyrn-modal__close:hover,
+.zyrn-modal__close:focus-visible {
+  border-color: var(--zyrn-color-brand);
+  background: var(--zyrn-color-brand);
+  color: var(--zyrn-ink-text);
+  outline: none;
+}
+
+.zyrn-modal__body {
+  padding: 24px;
+}
+
+@keyframes zyrn-modal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zyrn-modal-strike-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zyrn-modal__backdrop,
+  .zyrn-modal {
+    animation: none;
+  }
+}

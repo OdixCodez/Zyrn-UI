@@ -1,0 +1,116 @@
+.zyrn-toast-viewport {
+  position: fixed;
+  z-index: 1100;
+  display: grid;
+  width: min(390px, calc(100vw - 32px));
+  gap: 12px;
+  pointer-events: none;
+}
+
+.zyrn-toast-viewport--top-right {
+  top: 16px;
+  right: 16px;
+}
+
+.zyrn-toast-viewport--top-left {
+  top: 16px;
+  left: 16px;
+}
+
+.zyrn-toast-viewport--bottom-right {
+  right: 16px;
+  bottom: 16px;
+}
+
+.zyrn-toast-viewport--bottom-left {
+  bottom: 16px;
+  left: 16px;
+}
+
+.zyrn-toast {
+  display: grid;
+  grid-template-columns: 6px 1fr auto;
+  align-items: start;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--zyrn-color-border-strong);
+  border-radius: var(--zyrn-radius);
+  background: var(--zyrn-color-surface);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.38);
+  color: var(--zyrn-color-text);
+  pointer-events: auto;
+  animation: zyrn-toast-in 180ms ease-out;
+}
+
+.zyrn-toast__marker {
+  min-height: 44px;
+  background: var(--zyrn-color-text-muted);
+}
+
+.zyrn-toast--success .zyrn-toast__marker {
+  background: #4d9b72;
+}
+
+.zyrn-toast--warning .zyrn-toast__marker {
+  background: #c28736;
+}
+
+.zyrn-toast--danger .zyrn-toast__marker {
+  background: var(--zyrn-color-brand);
+}
+
+.zyrn-toast--info .zyrn-toast__marker {
+  background: var(--zyrn-indigo);
+}
+
+.zyrn-toast__title,
+.zyrn-toast__description {
+  margin: 0;
+}
+
+.zyrn-toast__title {
+  font-family: var(--zyrn-font-ui);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.zyrn-toast__description {
+  margin-top: 5px;
+  color: var(--zyrn-color-text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.zyrn-toast__close {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: var(--zyrn-radius);
+  background: transparent;
+  color: var(--zyrn-color-text-muted);
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.zyrn-toast__close:hover,
+.zyrn-toast__close:focus-visible {
+  border-color: var(--zyrn-color-brand);
+  color: var(--zyrn-color-text);
+  outline: none;
+}
+
+@keyframes zyrn-toast-in {
+  from { opacity: 0; transform: translateX(18px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zyrn-toast {
+    animation: none;
+  }
+}

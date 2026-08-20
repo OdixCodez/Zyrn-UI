@@ -4,11 +4,16 @@ import {
   ZyrnBadge,
   ZyrnButton,
   ZyrnCard,
+  ZyrnDropdown,
+  ZyrnDropdownItem,
   ZyrnInput,
+  ZyrnModal,
   ZyrnSelect,
   ZyrnTextarea,
   ZyrnThemeProvider,
+  ZyrnToastProvider,
   useZyrnTheme,
+  useZyrnToast,
 } from 'zyrn-ui';
 import '../../src/theme/index.css';
 import './gallery.css';
@@ -23,11 +28,13 @@ function ThemeToggle() {
   );
 }
 
-function GalleryApp() {
+function GalleryContent() {
   const [submitted, setSubmitted] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const { toast } = useZyrnToast();
 
   return (
-    <ZyrnThemeProvider defaultTheme="ink" className="gallery">
+    <>
       <header className="gallery__header">
         <div>
           <p className="gallery__eyebrow">Zyrn-UI / Component gallery</p>
@@ -89,14 +96,64 @@ function GalleryApp() {
               <ZyrnBadge variant="danger" dot>Danger</ZyrnBadge>
             </div>
           </ZyrnCard>
+
+          <ZyrnCard titleText="Overlays" subText="focus / feedback / menus" kanjiStamp="重">
+            <div className="gallery__stack">
+              <div className="gallery__row">
+                <ZyrnButton onClick={() => setModalOpen(true)} kanji="開">Open modal</ZyrnButton>
+                <ZyrnButton
+                  variant="secondary"
+                  onClick={() => toast({ title: 'System armed', description: 'A toast using the ink motion system.', variant: 'success' })}
+                  kanji="通知"
+                >
+                  Trigger toast
+                </ZyrnButton>
+              </div>
+              <ZyrnDropdown label="Operations">
+                <ZyrnDropdownItem description="Keep the current draft active" onSelect={() => toast({ title: 'Draft saved', variant: 'success' })}>
+                  Save draft
+                </ZyrnDropdownItem>
+                <ZyrnDropdownItem description="Mark this sequence for review" onSelect={() => toast({ title: 'Review flag added', variant: 'warning' })}>
+                  Flag review
+                </ZyrnDropdownItem>
+                <ZyrnDropdownItem description="Remove the current draft" onSelect={() => toast({ title: 'Draft cleared', variant: 'danger' })}>
+                  Clear draft
+                </ZyrnDropdownItem>
+              </ZyrnDropdown>
+            </div>
+          </ZyrnCard>
         </section>
       </main>
+
+      <ZyrnModal
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+        title="Deploy sequence"
+        description="Confirm the final payload before deployment."
+      >
+        <div className="gallery__modal-actions">
+          <ZyrnButton variant="outline" onClick={() => setModalOpen(false)}>Cancel</ZyrnButton>
+          <ZyrnButton onClick={() => { setModalOpen(false); toast({ title: 'Deployment queued', description: 'The sequence has entered the launch queue.', variant: 'success' }); }} kanji="実行">
+            Confirm deploy
+          </ZyrnButton>
+        </div>
+      </ZyrnModal>
 
       <footer className="gallery__footer">
         <span>zyrn-ui</span>
         <span>React + TypeScript</span>
         <span>Ink / Paper</span>
       </footer>
+    </>
+  );
+}
+
+function GalleryApp() {
+  return (
+    <ZyrnThemeProvider defaultTheme="ink" className="gallery">
+      <ZyrnToastProvider>
+        <GalleryContent />
+      </ZyrnToastProvider>
     </ZyrnThemeProvider>
   );
 }

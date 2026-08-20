@@ -1,14 +1,19 @@
-import { createRef } from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { createRef, useState } from 'react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 import {
   ZyrnBadge,
   ZyrnButton,
   ZyrnCard,
+  ZyrnDropdown,
+  ZyrnDropdownItem,
   ZyrnInput,
+  ZyrnModal,
   ZyrnSelect,
   ZyrnTextarea,
   ZyrnThemeProvider,
+  ZyrnToastProvider,
+  useZyrnToast,
   useZyrnTheme,
 } from './index';
 
@@ -90,6 +95,65 @@ describe('ZyrnBadge and ZyrnThemeProvider', () => {
     expect(screen.getByText('ink')).toBeInTheDocument();
     screen.getByRole('button', { name: 'ink' }).click();
     await waitFor(() => expect(screen.getByText('paper')).toBeInTheDocument());
+  });
+});
+
+describe('ZyrnModal', () => {
+  it('opens as a labelled dialog and closes on Escape', async () => {
+    function ModalExample() {
+      const [open, setOpen] = useState(false);
+      return (
+        <>
+          <button type="button" onClick={() => setOpen(true)}>Open modal</button>
+          <ZyrnModal open={open} onOpenChange={setOpen} title="Discard draft" description="This action cannot be undone.">
+            <button type="button">Keep editing</button>
+          </ZyrnModal>
+        </>
+      );
+    }
+
+    render(<ModalExample />);
+    fireEvent.click(screen.getByRole('button', { name: 'Open modal' }));
+    expect(screen.getByRole('dialog', { name: 'Discard draft' })).toBeInTheDocument();
+    fireEvent.keyDown(document, { key: 'Escape' });
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  });
+});
+
+describe('ZyrnDropdown', () => {
+  it('opens a menu and closes after an enabled item is selected', async () => {
+    const onSelect = vi.fn();
+    render(
+      <ZyrnDropdown label="Actions">
+        <ZyrnDropdownItem onSelect={onSelect}>Archive</ZyrnDropdownItem>
+      </ZyrnDropdown>,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Actions' }));
+    expect(screen.getByRole('menu')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Archive' }));
+    expect(onSelect).toHaveBeenCalledOnce();
+    await waitFor(() => expect(screen.queryByRole('menu')).not.toBeInTheDocument());
+  });
+});
+
+describe('ZyrnToastProvider', () => {
+  it('renders and dismisses a notification through the toast hook', async () => {
+    function ToastControl() {
+      const { toast } = useZyrnToast();
+      return <button type="button" onClick={() => toast({ title: 'Saved', description: 'Your draft is safe.', duration: 0 })}>Notify</button>;
+    }
+
+    render(
+      <ZyrnToastProvider>
+        <ToastControl />
+      </ZyrnToastProvider>,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Notify' }));
+    expect(screen.getByRole('status')).toHaveTextContent('Saved');
+    fireEvent.click(screen.getByRole('button', { name: 'Dismiss notification' }));
+    await waitFor(() => expect(screen.queryByRole('status')).not.toBeInTheDocument());
   });
 });
 

@@ -139,6 +139,82 @@ It accepts `label`, `kanji`, `description`, `error`, `size`, `fullWidth`, `place
 | `kanji` | `React.ReactNode` | — | Decorative Japanese accent. |
 | `dot` | `boolean` | `false` | Adds a decorative status dot. |
 
+### `ZyrnModal`
+
+`ZyrnModal` is a controlled dialog with labelled semantics, Escape-to-close behavior, focus containment, focus restoration, scroll locking, and an optional overlay-click close action. Keep it under your `ZyrnThemeProvider` so it inherits the scoped theme.
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<>
+  <ZyrnButton onClick={() => setOpen(true)}>Open dialog</ZyrnButton>
+  <ZyrnModal
+    open={open}
+    onOpenChange={setOpen}
+    title="Discard draft"
+    description="This action cannot be undone."
+  >
+    <ZyrnButton onClick={() => setOpen(false)}>Keep editing</ZyrnButton>
+  </ZyrnModal>
+</>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---:|---|
+| `open` | `boolean` | — | Controls dialog visibility. |
+| `onOpenChange` | `(open: boolean) => void` | — | Receives close requests from Escape, the close button, and backdrop. |
+| `title` | `React.ReactNode` | — | Accessible dialog title. |
+| `description` | `React.ReactNode` | — | Optional descriptive text associated with the dialog. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Maximum dialog width preset. |
+| `closeOnOverlayClick` | `boolean` | `true` | Enables closing after a backdrop click. |
+
+### `ZyrnDropdown`
+
+`ZyrnDropdown` and `ZyrnDropdownItem` provide a composable button-driven menu. The menu supports arrow-key navigation, Home, End, Escape, outside clicks, disabled items, and automatic closing after a selection.
+
+```tsx
+<ZyrnDropdown label="Operations" align="end">
+  <ZyrnDropdownItem onSelect={saveDraft}>Save draft</ZyrnDropdownItem>
+  <ZyrnDropdownItem description="Flags this sequence for review" onSelect={flagForReview}>
+    Flag review
+  </ZyrnDropdownItem>
+</ZyrnDropdown>
+```
+
+| `ZyrnDropdown` prop | Type | Default | Description |
+|---|---|---:|---|
+| `label` | `React.ReactNode` | — | Trigger button content. |
+| `align` | `'start' \| 'end'` | `'start'` | Menu alignment relative to the trigger. |
+| `disabled` | `boolean` | `false` | Disables the trigger. |
+
+`ZyrnDropdownItem` accepts native button attributes, `onSelect`, and an optional `description`.
+
+### `ZyrnToastProvider`
+
+Wrap a themed application section with `ZyrnToastProvider`, then call `useZyrnToast()` from descendants. Toasts are announced through a live region, include a keyboard-visible dismiss control, and support automatic expiry.
+
+```tsx
+function SaveButton() {
+  const { toast } = useZyrnToast();
+
+  return (
+    <ZyrnButton onClick={() => toast({
+      title: 'Saved',
+      description: 'Your draft is safe.',
+      variant: 'success',
+    })}>
+      Save
+    </ZyrnButton>
+  );
+}
+
+<ZyrnToastProvider position="top-right" defaultDuration={5000}>
+  <SaveButton />
+</ZyrnToastProvider>
+```
+
+The `toast` function accepts `title`, optional `description`, `variant`, `duration` in milliseconds, and an optional caller-provided `id`. `duration: 0` creates a persistent notification. Available variants are `default`, `success`, `warning`, `danger`, and `info`.
+
 ### `ZyrnCard`
 
 `ZyrnCard` provides a visual container with optional header metadata and a Japanese stamp accent. It forwards its ref to the root `<div>` and accepts standard div attributes.
@@ -291,9 +367,12 @@ src/
 │   ├── Button/
 │   ├── Card/
 │   ├── Field/
+│   ├── Dropdown/
 │   ├── Input/
+│   ├── Modal/
 │   ├── Select/
-│   └── Textarea/
+│   ├── Textarea/
+│   └── Toast/
 ├── theme/
 │   ├── index.css
 │   ├── themes.css

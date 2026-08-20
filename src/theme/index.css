@@ -10,3 +10,6 @@
 @import '../components/Textarea/Textarea.css' layer(zyrn.components);
 @import '../components/Select/Select.css' layer(zyrn.components);
 @import '../components/Badge/Badge.css' layer(zyrn.components);
+@import '../components/Modal/Modal.css' layer(zyrn.components);
+@import '../components/Dropdown/Dropdown.css' layer(zyrn.components);
+@import '../components/Toast/Toast.css' layer(zyrn.components);
