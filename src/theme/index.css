@@ -1,6 +1,12 @@
-@import './tokens.css';
-@import './themes.css';
-@import './typography.css';
-@import '../components/Button/Button.css';
-@import '../components/Card/Card.css';
-@import '../components/Input/Input.css';
+@layer zyrn.tokens, zyrn.theme, zyrn.typography, zyrn.components;
+
+@import './tokens.css' layer(zyrn.tokens);
+@import './themes.css' layer(zyrn.theme);
+@import './typography.css' layer(zyrn.typography);
+@import '../components/Field/Field.css' layer(zyrn.components);
+@import '../components/Button/Button.css' layer(zyrn.components);
+@import '../components/Card/Card.css' layer(zyrn.components);
+@import '../components/Input/Input.css' layer(zyrn.components);
+@import '../components/Textarea/Textarea.css' layer(zyrn.components);
+@import '../components/Select/Select.css' layer(zyrn.components);
+@import '../components/Badge/Badge.css' layer(zyrn.components);

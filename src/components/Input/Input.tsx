@@ -1,4 +1,5 @@
 import React, { forwardRef, useId } from 'react';
+import { ZyrnField } from '../Field/Field';
 import './Input.css';
 
 export interface ZyrnInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
@@ -32,7 +33,7 @@ export const ZyrnInput = forwardRef<HTMLInputElement, ZyrnInputProps>(function Z
   const inputId = id ?? generatedId;
   const descriptionId = description ? `${inputId}-description` : undefined;
   const errorId = error ? `${inputId}-error` : undefined;
-
+  const describedBy = [descriptionId, errorId].filter(Boolean).join(' ') || undefined;
   const classes = [
     'zyrn-input',
     `zyrn-input--${variant}`,
@@ -43,50 +44,34 @@ export const ZyrnInput = forwardRef<HTMLInputElement, ZyrnInputProps>(function Z
   ].filter(Boolean).join(' ');
 
   return (
-    <div className={classes}>
-      {(label || kanji) && (
-        <div className="zyrn-input__label-wrap">
-          {label ? (
-            <label className="zyrn-input__label" htmlFor={inputId}>
-              {label}
-            </label>
-          ) : kanji ? (
-            <label className="zyrn-input__kanji" htmlFor={inputId}>
-              {kanji}
-            </label>
-          ) : null}
-          {required && <span className="zyrn-input__required" aria-hidden="true">*</span>}
-          {label && kanji && <span className="zyrn-input__kanji" aria-hidden="true">{kanji}</span>}
-        </div>
-      )}
-
-      <div className="zyrn-input__field-wrap">
-        <div className="zyrn-input__wrapper">
-          <input
-            ref={ref}
-            id={inputId}
-            className="zyrn-input__field"
-            disabled={disabled}
-            required={required}
-            aria-invalid={Boolean(error)}
-            aria-describedby={[descriptionId, errorId].filter(Boolean).join(' ') || undefined}
-            {...rest}
-          />
+    <ZyrnField
+      controlId={inputId}
+      label={label}
+      kanji={kanji}
+      description={description}
+      error={error}
+      required={required}
+      disabled={disabled}
+      size={size}
+      fullWidth={fullWidth}
+    >
+      <div className={classes}>
+        <div className="zyrn-input__field-wrap">
+          <div className="zyrn-input__wrapper">
+            <input
+              ref={ref}
+              id={inputId}
+              className="zyrn-input__field"
+              disabled={disabled}
+              required={required}
+              aria-invalid={error ? true : undefined}
+              aria-describedby={describedBy}
+              {...rest}
+            />
+          </div>
         </div>
       </div>
-
-      {description && (
-        <div id={descriptionId} className="zyrn-input__description">
-          {description}
-        </div>
-      )}
-
-      {error && (
-        <div id={errorId} className="zyrn-input__error" role="alert">
-          {error}
-        </div>
-      )}
-    </div>
+    </ZyrnField>
   );
 });
 

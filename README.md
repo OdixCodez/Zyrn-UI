@@ -2,7 +2,7 @@
 
 > **Clean structure. Dirty edges.**
 
-`zyrn-ui` is a React and TypeScript component library with a sharp woodblock, Gothic, and graffiti-influenced visual identity. It provides accessible button, input, and card primitives, a token-based theme system, and lightweight DOM-native motion helpers.
+`zyrn-ui` is a React and TypeScript component library with a sharp woodblock, Gothic, and graffiti-influenced visual identity. It provides accessible button, input, textarea, and select primitives, compact status badges, a token-based theme system, a scoped theme provider, and lightweight DOM-native motion helpers.
 
 ## Installation
 
@@ -91,6 +91,54 @@ export default function App() {
 | `fullWidth` | `boolean` | `false` | Applies full-width layout. |
 | `...rest` | `InputHTMLAttributes<HTMLInputElement>` | — | Native input props excluding the native numeric `size` attribute. |
 
+### `ZyrnTextarea`
+
+`ZyrnTextarea` shares the same field contract as `ZyrnInput` while exposing the native textarea API and a resizable writing surface.
+
+```tsx
+<ZyrnTextarea
+  label="Brief"
+  kanji="概要"
+  placeholder="Describe the task"
+  description="Keep it concise."
+  fullWidth
+/>
+```
+
+It accepts `label`, `kanji`, `description`, `error`, `size`, `fullWidth`, and all native `TextareaHTMLAttributes` including `rows`, `maxLength`, and `onChange`. The `size` prop uses `'sm' | 'md' | 'lg'` rather than the native numeric input size.
+
+### `ZyrnSelect`
+
+`ZyrnSelect` preserves native option and keyboard behavior while applying the shared field label and error relationships. Use `placeholder` for a disabled first option.
+
+```tsx
+<ZyrnSelect label="Priority" kanji="優先" placeholder="Choose one" defaultValue="normal">
+  <option value="low">Low</option>
+  <option value="normal">Normal</option>
+  <option value="high">High</option>
+</ZyrnSelect>
+```
+
+It accepts `label`, `kanji`, `description`, `error`, `size`, `fullWidth`, `placeholder`, and all native `SelectHTMLAttributes` except the native numeric `size` prop.
+
+### `ZyrnBadge`
+
+`ZyrnBadge` is a compact status primitive with semantic variants, optional dot indicators, kanji accents, forwarded refs, and native span attributes.
+
+```tsx
+<ZyrnBadge variant="success" kanji="稼働" dot>
+  Ready
+</ZyrnBadge>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---:|---|
+| `children` | `React.ReactNode` | — | Visible status label. |
+| `variant` | `'default' \| 'success' \| 'warning' \| 'danger' \| 'info'` | `'default'` | Semantic visual treatment. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Density preset. |
+| `kanji` | `React.ReactNode` | — | Decorative Japanese accent. |
+| `dot` | `boolean` | `false` | Adds a decorative status dot. |
+
 ### `ZyrnCard`
 
 `ZyrnCard` provides a visual container with optional header metadata and a Japanese stamp accent. It forwards its ref to the root `<div>` and accepts standard div attributes.
@@ -117,7 +165,27 @@ export default function App() {
 
 ## Themes and tokens
 
-The stylesheet defines primitive palette tokens globally and semantic tokens within two opt-in themes. Use a theme attribute on an application root or container so every component inherits a complete semantic set.
+The stylesheet defines primitive palette tokens globally and semantic tokens within two opt-in themes. Use a theme attribute on an application root or container so every component inherits a complete semantic set. The package styles are emitted inside ordered `@layer zyrn.*` layers, allowing ordinary unlayered application CSS to override them without specificity battles.
+
+For React applications, `ZyrnThemeProvider` provides a scoped `data-theme` attribute and `useZyrnTheme` exposes the current theme and toggle action.
+
+```tsx
+import { ZyrnThemeProvider, useZyrnTheme } from 'zyrn-ui';
+
+function ThemeToggle() {
+  const { theme, toggleTheme } = useZyrnTheme();
+  return <button onClick={toggleTheme}>Switch from {theme}</button>;
+}
+
+export function App() {
+  return (
+    <ZyrnThemeProvider defaultTheme="ink">
+      <ThemeToggle />
+      {/* components inherit the provider's theme */}
+    </ZyrnThemeProvider>
+  );
+}
+```
 
 ```tsx
 <section data-theme="paper">
@@ -187,6 +255,15 @@ npm run build
 
 # Run the full local quality gate.
 npm run check
+
+# Start the Vite component gallery.
+npm run gallery:dev
+
+# Typecheck and build the gallery.
+npm run gallery:build
+
+# Run package and gallery checks together.
+npm run check:all
 ```
 
 The npm publish lifecycle runs `npm run build` through the `prepack` script, preventing stale build artifacts from being included in a package tarball.
@@ -210,9 +287,13 @@ Import styles through the exported `zyrn-ui/styles.css` package subpath.
 ```text
 src/
 ├── components/
+│   ├── Badge/
 │   ├── Button/
 │   ├── Card/
-│   └── Input/
+│   ├── Field/
+│   ├── Input/
+│   ├── Select/
+│   └── Textarea/
 ├── theme/
 │   ├── index.css
 │   ├── themes.css
@@ -221,6 +302,13 @@ src/
 ├── components.test.tsx
 ├── index.ts
 └── motion.ts
+
+gallery/
+├── index.html
+├── src/main.tsx
+├── src/gallery.css
+├── tsconfig.json
+└── vite.config.ts
 ```
 
 ## License

@@ -48,6 +48,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "check": "npm run typecheck && npm run test && npm run build",
+    "gallery:dev": "vite --config gallery/vite.config.ts",
+    "gallery:build": "tsc --project gallery/tsconfig.json && vite build --config gallery/vite.config.ts",
+    "check:all": "npm run check && npm run gallery:build",
     "prepack": "npm run build"
   },
   "peerDependencies": {
@@ -59,11 +62,13 @@
     "@testing-library/react": "^16.1.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^25.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",
+    "vite": "^6.0.5",
     "vitest": "^2.1.9"
   }
 }

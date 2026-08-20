@@ -8,6 +8,8 @@ pnpm-debug.log
 dist/
 build/
 out/
+gallery/dist/
+gallery/.vite/
 
 # Environment variables
 .env

@@ -1,7 +1,16 @@
 import { createRef } from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { ZyrnButton, ZyrnCard, ZyrnInput } from './index';
+import {
+  ZyrnBadge,
+  ZyrnButton,
+  ZyrnCard,
+  ZyrnInput,
+  ZyrnSelect,
+  ZyrnTextarea,
+  ZyrnThemeProvider,
+  useZyrnTheme,
+} from './index';
 
 describe('ZyrnButton', () => {
   it('forwards its ref, uses a safe default type, and renders React-node children as its label', () => {
@@ -41,6 +50,46 @@ describe('ZyrnInput', () => {
     expect(input).toHaveAttribute('aria-invalid', 'true');
     expect(input).toHaveAttribute('aria-describedby');
     expect(screen.getByRole('alert')).toHaveTextContent('This field is required.');
+  });
+});
+
+describe('ZyrnTextarea and ZyrnSelect', () => {
+  it('shares field labels and described-by relationships across new controls', () => {
+    render(
+      <>
+        <ZyrnTextarea label="Brief" kanji="概要" description="Keep it concise." error="Brief is required." />
+        <ZyrnSelect label="Priority" kanji="優先" placeholder="Choose one">
+          <option value="normal">Normal</option>
+        </ZyrnSelect>
+      </>,
+    );
+
+    const textarea = screen.getByLabelText('Brief');
+    expect(textarea).toHaveAttribute('aria-invalid', 'true');
+    expect(textarea).toHaveAttribute('aria-describedby');
+    expect(screen.getByLabelText('Priority')).toBeInTheDocument();
+    expect(screen.getByText('Brief is required.')).toHaveAttribute('role', 'alert');
+  });
+});
+
+describe('ZyrnBadge and ZyrnThemeProvider', () => {
+  it('renders semantic badge content and toggles the scoped theme', async () => {
+    function ThemeControl() {
+      const { theme, toggleTheme } = useZyrnTheme();
+      return <button type="button" onClick={toggleTheme}>{theme}</button>;
+    }
+
+    render(
+      <ZyrnThemeProvider>
+        <ZyrnBadge variant="success" kanji="稼働" dot>Ready</ZyrnBadge>
+        <ThemeControl />
+      </ZyrnThemeProvider>,
+    );
+
+    expect(screen.getByText('Ready')).toBeInTheDocument();
+    expect(screen.getByText('ink')).toBeInTheDocument();
+    screen.getByRole('button', { name: 'ink' }).click();
+    await waitFor(() => expect(screen.getByText('paper')).toBeInTheDocument());
   });
 });
 
