@@ -152,7 +152,7 @@
   border-color: transparent;
 }
 
-.zyrn-input--filled .zyrn-input__wrapper:has(.zyrn-input__field:focus) {
+.zyrn-input--filled .zyrn-input__wrapper:focus-within {
   background: var(--zyrn-color-surface-hover);
   border-color: var(--zyrn-color-focus);
 }

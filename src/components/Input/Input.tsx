@@ -46,13 +46,17 @@ export const ZyrnInput = forwardRef<HTMLInputElement, ZyrnInputProps>(function Z
     <div className={classes}>
       {(label || kanji) && (
         <div className="zyrn-input__label-wrap">
-          {label && (
+          {label ? (
             <label className="zyrn-input__label" htmlFor={inputId}>
               {label}
             </label>
-          )}
-          {required && <span className="zyrn-input__required">*</span>}
-          {kanji && <span className="zyrn-input__kanji">{kanji}</span>}
+          ) : kanji ? (
+            <label className="zyrn-input__kanji" htmlFor={inputId}>
+              {kanji}
+            </label>
+          ) : null}
+          {required && <span className="zyrn-input__required" aria-hidden="true">*</span>}
+          {label && kanji && <span className="zyrn-input__kanji" aria-hidden="true">{kanji}</span>}
         </div>
       )}
 

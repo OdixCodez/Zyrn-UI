@@ -2,6 +2,25 @@
   "name": "zyrn-ui",
   "version": "1.1.2",
   "description": "Clean structure. Dirty edges. A premium React + TypeScript component library.",
+  "license": "MIT",
+  "author": "OdixCodez",
+  "homepage": "https://github.com/OdixCodez/Zyrn-UI#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OdixCodez/Zyrn-UI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OdixCodez/Zyrn-UI/issues"
+  },
+  "keywords": [
+    "react",
+    "ui",
+    "component-library",
+    "typescript",
+    "woodblock",
+    "gothic",
+    "zyrn"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,23 +32,38 @@
     },
     "./styles.css": "./dist/index.css"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run typecheck && npm run test && npm run build",
+    "prepack": "npm run build"
   },
-  "keywords": ["react", "ui", "woodblock", "gothic", "typescript", "zyrn"],
-  "author": "OdixCodez",
-  "license": "MIT",
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "jsdom": "^25.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0"
+    "vitest": "^2.1.9"
   }
 }

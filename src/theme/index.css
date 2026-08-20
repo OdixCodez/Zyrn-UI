@@ -2,4 +2,5 @@
 @import './themes.css';
 @import './typography.css';
 @import '../components/Button/Button.css';
+@import '../components/Card/Card.css';
 @import '../components/Input/Input.css';
