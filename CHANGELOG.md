@@ -6,6 +6,14 @@ The project follows [Semantic Versioning](https://semver.org/). Patch releases c
 
 ## [Unreleased]
 
+## [1.2.4] - 2026-08-20
+
+#### Added
+
+- Explicit component subpath exports for all 30 public component barrels, including ESM, CommonJS, and TypeScript declaration entries.
+- `verify:subpaths` and `check:subpaths` scripts that verify every supported subpath resolves in both module formats with declaration output present.
+- README guidance for per-component imports and the shared stylesheet requirement.
+
 ## [1.2.3] - 2026-08-20
 
 #### Added

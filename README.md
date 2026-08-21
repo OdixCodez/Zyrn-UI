@@ -282,6 +282,26 @@ Put a skeleton inside a named, busy region so assistive technologies receive mea
 import 'zyrn-ui/styles.css';
 ```
 
+### Per-component imports
+
+In addition to the root entry point, components can be imported from dedicated subpaths to make application imports more explicit. Import the shared package stylesheet once in the application entry because component subpaths intentionally do not inject CSS.
+
+```tsx
+import 'zyrn-ui/styles.css';
+import { ZyrnButton, type ZyrnButtonProps } from 'zyrn-ui/button';
+import { ZyrnAlert } from 'zyrn-ui/alert';
+import { ZyrnProgress } from 'zyrn-ui/progress';
+```
+
+| Component family | Supported subpaths |
+|---|---|
+| Feedback | `alert`, `empty-state`, `progress`, `skeleton`, `toast` |
+| Actions and forms | `button`, `checkbox`, `field`, `input`, `radio-group`, `segmented-control`, `select`, `switch`, `textarea` |
+| Layout and display | `badge`, `card`, `container`, `grid`, `inline`, `separator`, `stack`, `visually-hidden` |
+| Navigation and overlays | `alert-dialog`, `context-menu`, `drawer`, `dropdown`, `modal`, `popover`, `tabs`, `tooltip` |
+
+Every listed subpath provides ESM, CommonJS, and declaration output. The root `zyrn-ui` entry remains fully supported and continues to export the complete public API.
+
 ### Visual regression testing
 
 The gallery has a deterministic Playwright visual-regression suite for the ink and paper themes, responsive layout, feedback states, modal focus treatment, and keyboard-open context menus.
