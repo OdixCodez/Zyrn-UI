@@ -282,6 +282,18 @@ Put a skeleton inside a named, busy region so assistive technologies receive mea
 import 'zyrn-ui/styles.css';
 ```
 
+### Visual regression testing
+
+The gallery has a deterministic Playwright visual-regression suite for the ink and paper themes, responsive layout, feedback states, modal focus treatment, and keyboard-open context menus.
+
+```bash
+npm run visual:install  # First-time Chromium installation
+npm run visual:test     # Compare the gallery against committed baselines
+npm run visual:update   # Update baselines after deliberate visual review
+```
+
+Visual baselines are committed in `tests/visual/__screenshots__/`. The suite disables motion, waits for fonts, uses one pinned Chromium project, and treats a screenshot diff as a review item rather than an automatic baseline update. `npm run check:all` remains browser-independent; invoke `npm run check:visual` in an environment where Chromium has been installed.
+
 ### Selection controls
 
 `ZyrnCheckbox`, `ZyrnSwitch`, `ZyrnRadioGroup`, and `ZyrnSegmentedControl` share the same description and error contract as the existing input controls. They can be controlled or uncontrolled where the underlying interaction model allows it and all support the supplied ink and paper themes.

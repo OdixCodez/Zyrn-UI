@@ -6,6 +6,15 @@ The project follows [Semantic Versioning](https://semver.org/). Patch releases c
 
 ## [Unreleased]
 
+## [1.2.3] - 2026-08-20
+
+#### Added
+
+- Playwright Chromium visual-regression coverage for desktop ink and mobile paper gallery baselines, feedback states, modal focus treatment, and keyboard-open ContextMenu states.
+- Deterministic visual test stabilization for reduced motion, font readiness, theme selection, and animation suppression.
+- Explicit `visual:install`, `visual:test`, `visual:update`, and `check:visual` package scripts, plus committed screenshot baselines and ignored transient test reports.
+- README guidance for reviewing and intentionally updating visual baselines.
+
 ## [1.2.2] - 2026-08-20
 
 #### Fixed
